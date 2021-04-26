@@ -1,3 +1,4 @@
+import LoginForm from "./components/LoginForm";
 import React from "react";
 import { Route } from "react-router-dom";
 import RegisterForm from "./components/RegisterForm";

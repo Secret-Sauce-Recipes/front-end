@@ -1,6 +1,8 @@
-import {combineReducers} from 'redux';
-import {registerFormReducer} from "./registerFormReducer"
+import { combineReducers } from "redux";
+import { userReducer } from "./userReducer";
+import { recipeReducer } from "./recipeReducer";
 
 export const rootReducer = combineReducers({
-    registerForm: registerFormReducer
-})
+  userReducer: userReducer,
+  recipeReducer: recipeReducer,
+});

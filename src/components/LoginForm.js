@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect }  from "react";
 import schema from "../validation/login-schema";
 import * as yup from "yup";
 
@@ -22,8 +22,9 @@ export default function Form() {
   // const { values, submit, change, errors } = props;
 
   // state for login credentials and form errors
-  const [loginValues, setLoginValues] = useState(initialLoginValues);
-  const [loginFormErrors, setLoginFormError] = useState(initialLoginErrors)
+  const [loginFormValues, setLoginFormValues] = useState(initialLoginValues);
+  const [loginFormErrors, setLoginFormErrors] = useState(initialLoginErrors);
+  const [disabled, setDisabled] = useState(initialLoginDisabled);
   
   const onChange = (evt) => {
     const { name, value } = evt.target;
@@ -46,13 +47,18 @@ export default function Form() {
       // if the validation is unsuccessful, we can set the error message to the message
       // returned from yup (that we created in our schema)
       .catch((err) => {
-        setFormErrors({
-          ...formErrors,
+        setLoginFormErrors({
+          ...loginFormErrors,
           // validation error from schema
           [name]: err.errors[0],
         });
       });
-
+      // finally, update form values with the change
+      setLoginFormValues({
+        ...loginFormValues,
+        [name]: value,
+      });
+    }
         // on login submit, create credentials object and send to authenticate function
   const onSubmit = (evt) => {
     evt.preventDefault();
@@ -74,35 +80,37 @@ export default function Form() {
     //   .post("https://xxxxxx", loginCredentials)
     //   .then((res) => {
     // //    reset form
-    //     setLoginFormValues(initialLoginValues);
+        setLoginFormValues(initialLoginValues);
     //   })
     //   .catch((err) => {
     //     console.log(err);
     //     debugger;
     //   });
   };
-
+  useEffect(() => {
+    // ADJUST THE STATUS OF `disabled` EVERY TIME `loginFormValues` CHANGES
+    schema.isValid(loginFormValues).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [loginFormValues]);
 
 
   return (
     <form className="form container" onSubmit={onSubmit}>
-        {/* DISABLE THE BUTTON */}
-        <button id="login" disabled={disabled}>Log in</button>
 
         <div className="errors">
-          {/* 🔥 RENDER THE VALIDATION ERRORS HERE */}
+          {/* RENDER THE VALIDATION ERRORS HERE */}
           <div>{loginFormErrors.username}</div>
           <div>{loginFormErrors.password}</div>
         </div>
 
       <div className="login-inputs">
-        <h4>Log In:</h4>
 
        {/* ////////// LOGIN TEXT INPUTS ////////// */}
         <label>
           Username&nbsp;
           <input
-            value={loginValues.username}
+            value={loginFormValues.username}
             onChange={onChange}
             name="username"
             type="text"
@@ -112,15 +120,16 @@ export default function Form() {
         <label>
           Password&nbsp;
           <input
-            value={loginValues.password}
+            value={loginFormValues.password}
             onChange={onChange}
             name="password"
             type="password"
           />
+        {/* DISABLE THE BUTTON */}
+        <button id="login" disabled={disabled}>Log in</button>
         </label>
 
       </div>
     </form>
   );
-}
 }

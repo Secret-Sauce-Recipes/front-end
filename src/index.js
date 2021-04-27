@@ -9,14 +9,14 @@ import { createStore, applyMiddleware } from "redux";
 
 import App from "./App";
 
-const store = createStore(rootReducer, applyMiddleware(thunk, logger));
+// const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <Provider store={store}>
+      {/* <Provider store={store}> */}
         <App />
-      </Provider>
+      {/* </Provider> */}
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

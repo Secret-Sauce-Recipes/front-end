@@ -6,7 +6,7 @@ const PageStyle = styled.div`
     box-sizing: border-box;
     background-color:#fefae0;
     width:100%;
-    border: 1px solid blue;
+    //border: 1px solid blue;
     display: flex;
     justify-content: center;
 `
@@ -20,45 +20,91 @@ const FormGroup = styled.div`
 	width: 50%;
     margin: 0 auto;
     justify-content: center;
-    border: 1px solid red;
-`
-const StyledInput = styled.input`
-    width: 15rem;
-    height: 2.5vh;
-    margin:.5rem;
-    padding:2px;
-`
-const StyledTextArea = styled.textarea`
-    width: 20rem;
-    height: 25vh;
-    width:100%;
-`
+    border: 1px solid #3D405B;
+    align-items:center;
+    `
+
+    const StyledH2 = styled.h2`
+    height: 2vh;
+    display:flex;
+    justify-content: center;
+    color: #3D405B;
+    font-family: sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+`    
+const StyledH3 = styled.h3`
+  
+    height: 1vh;
+    display:flex;
+    justify-content: left;
+    color: black;
+    font-family: sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+`    
+
 const StyledFirstDiv = styled.div`
     border: 1.5px solid black;
     display: flex;
     flex-direction: column;
     padding: 1rem;
     align-items: left;
-    margin: 1rem;
     width:60%;
 `
 const StyledSecondDiv = styled.div`
-    border: 1.5px solid black;
+     //border: 1.5px solid black;
     display: flex;
     flex-direction: column;
-    padding: 1.5rem;
+     padding:1rem;
     align-items: left;
-    margin: 1.5rem;
-    width:60%;
+    width:65%;
+    padding:.5rem;
 `
 const StyledThirdDiv = styled.div`
-    border: 1.5px solid black;
+    //border: 1.5px solid black;
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
     align-items: left;
-    margin: 1.5rem;
-    width:60%;
+    //margin: 1.5rem;
+    width:65%;
+`
+const StyledInput = styled.input`
+    width: 15rem;
+    height: 2.5vh;
+    margin:.5rem;
+     //padding:2px;
+`
+const StyledTextArea = styled.textarea`
+    width: 20rem;
+    height: 25vh;
+    width:100%;
+    resize: none;
+`
+const StyledLabel = styled.label`
+
+margin-right:4rem;
+`
+const StyledDate =styled.input`
+ margin:.5rem 3.8rem;
+width: 15rem;
+height: 2.5vh;
+ //margin:.5rem;
+padding:2px;
+`
+const StyledCategory =styled.input`
+ margin:.5rem 2rem;
+width: 15rem;
+height: 2.5vh;
+ //margin:.5rem;
+padding:2px;
+`
+const StyledInput2 =styled.input`
+margin:.5rem 1.5rem;
+width: 15rem;
+ height: 2.5vh;
+padding:2px;
 `
 const ButtonDiv = styled.div`
     display: flex;
@@ -72,24 +118,12 @@ const ButtonDiv = styled.div`
 const Btn = styled.button`
      display: flex;
      justify-content: center;
-    background-color: #E07A5F;
-     width: 10%;
+    background-color: #81B29A;
+    
     height: 5vh;
      align-content:center;
      align-items: center;
     font-size: 1rem;
-`
-const StyledH3 = styled.h3`
-  
-    height: 5vh;
-    display:flex;
-    justify-content: left;
-    // align-content:left;
-    // align-items: left;
-    color: black;
-    font-family: sans-serif;
-    font-size: 2rem;
-    font-weight: bold;
 `
 
 
@@ -128,12 +162,12 @@ const onSubmit = (evt) => {
     <PageStyle>
      <FormGroup onSubmit={onSubmit}>
         <div className="form-input">
-        <StyledH3>Add  New recipe</StyledH3>
+        <StyledH2>Add  New Recipe</StyledH2>
         </div>
         <StyledFirstDiv>
             <label>
                 Date : &nbsp;
-                <StyledInput
+                <StyledDate
                     value={recipe.date}
                     onChange={onChange}
                     name="date"
@@ -143,7 +177,7 @@ const onSubmit = (evt) => {
             
             <label>
                 Username :&nbsp;
-                <StyledInput
+                <StyledInput2
                     value={recipe.username}
                     onChange={onChange}
                     name="username"
@@ -161,7 +195,7 @@ const onSubmit = (evt) => {
             </label>
             <label>
                 Category :&nbsp;
-                <StyledInput
+                <StyledCategory
                     value={recipe.category}
                     onChange={onChange}
                     name="category"
@@ -169,11 +203,11 @@ const onSubmit = (evt) => {
                 />
                 </label>
             </StyledFirstDiv>
-            <StyledH3>Ingredients</StyledH3>
-        <StyledSecondDiv>
-           
+            <div>
+                <StyledH3>Ingredients</StyledH3>
+            </div>
+        <StyledSecondDiv> 
             <label>
-                {/* Ingredients&nbsp; */}
                 <StyledTextArea
                     value={recipe.ingredients_name}
                     onChange={onChange}
@@ -182,11 +216,11 @@ const onSubmit = (evt) => {
                 />
             </label>
         </StyledSecondDiv>
-        <StyledH3>Instructions</StyledH3>
-        <StyledThirdDiv>
-            
+        <div>
+            <StyledH3>Instructions</StyledH3>
+        </div>
+        <StyledThirdDiv>        
             <label>
-            {/* Instructions&nbsp; */}
             <StyledTextArea
                 value={recipe.instruction_text}
                 onChange={onChange}

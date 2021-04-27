@@ -9,4 +9,14 @@ const useForm = (initialValues) => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const reset = () => {
+    setValues({
+      initialValues,
+    });
+  };
+
+  return [values, handleChanges, reset];
 };
+
+export default useForm;

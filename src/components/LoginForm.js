@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 // STYLES COPIED FROM AddRecipe.js - SHOULD BE REFACTORED
 //Styles
-// Had to change flex-direction from PageStyle, so renamed it LoginStyle
+// Had to change flex-direction from PageStyle, so renamed it LoginStyles
 const LoginStyle = styled.div`
   box-sizing: border-box;
   background-color: #fefae0;
@@ -22,7 +22,7 @@ const LoginStyle = styled.div`
 const StyledInput = styled.input`
   width: 15rem;
   height: 2.5vh;
-  margin: 0.49rem;
+  margin: 0.5rem;
   padding: 2px;
 `;
 const Btn = styled.button`

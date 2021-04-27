@@ -1,6 +1,46 @@
 import React, { useState, useEffect }  from "react";
 import schema from "../validation/login-schema";
 import * as yup from "yup";
+import styled from 'styled-components'
+
+// STYLES COPIED FROM AddRecipe.js - SHOULD BE REFACTORED
+//Styles
+const PageStyle = styled.div`
+    box-sizing: border-box;
+    background-color:#fefae0;
+    width:100%;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
+    `
+const StyledInput = styled.input`
+    width: 15rem;
+    height: 2.5vh;
+    margin:.5rem;
+    padding:2px;
+`
+const Btn = styled.button`
+     display: flex;
+     justify-content: center;
+    background-color: #E07A5F;
+     width: 10%;
+    height: 5vh;
+     align-content:center;
+     align-items: center;
+    font-size: 1rem;
+`
+const FormGroup = styled.div`
+	color: black;
+    font-family: sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+	width: 50%;
+    margin: 0 auto;
+    justify-content: center;
+    border: 1px solid red;
+`
 
 // Set initial login credentials empty
 const initialLoginValues = {
@@ -18,8 +58,6 @@ const initialLoginErrors = {
 const initialLoginDisabled = true;
 
 export default function Form() {
-// export default function Form(props) {
-  // const { values, submit, change, errors } = props;
 
   // state for login credentials and form errors
   const [loginFormValues, setLoginFormValues] = useState(initialLoginValues);
@@ -34,9 +72,8 @@ export default function Form() {
   const inputChange = (name, value) => {
     // RUN VALIDATION WITH YUP
     yup
-      .reach(schema, name) // get to this part of the schema
-      //we can then run validate using the value
-      .validate(value) // validate this value
+      .reach(schema, name) 
+      .validate(value) 
       .then(() => {
         // happy path and clear the error
         setLoginFormErrors({
@@ -44,8 +81,7 @@ export default function Form() {
           [name]: "",
         });
       })
-      // if the validation is unsuccessful, we can set the error message to the message
-      // returned from yup (that we created in our schema)
+      // add error message each time validation unsuccessful
       .catch((err) => {
         setLoginFormErrors({
           ...loginFormErrors,
@@ -67,8 +103,8 @@ export default function Form() {
       
   const loginSubmit = () => {
     const loginCredentials = {
-      username: loginFormValues.username.trim(),
-      password: loginFormValues.password.trim(),
+    username: loginFormValues.username.trim(),
+    password: loginFormValues.password.trim(),
     };
     // authenticate login
     loginAuthenticate(loginCredentials);
@@ -96,40 +132,37 @@ export default function Form() {
 
 
   return (
+    <PageStyle>
     <form className="form container" onSubmit={onSubmit}>
-
-        <div className="errors">
-          {/* RENDER THE VALIDATION ERRORS HERE */}
-          <div>{loginFormErrors.username}</div>
-          <div>{loginFormErrors.password}</div>
-        </div>
 
       <div className="login-inputs">
 
        {/* ////////// LOGIN TEXT INPUTS ////////// */}
-        <label>
-          Username&nbsp;
-          <input
+          <StyledInput
             value={loginFormValues.username}
             onChange={onChange}
             name="username"
             type="text"
+            placeholder="Username"
           />
-        </label>
 
-        <label>
-          Password&nbsp;
-          <input
+          <StyledInput
             value={loginFormValues.password}
             onChange={onChange}
             name="password"
             type="password"
+            placeholder="Password"
           />
         {/* DISABLE THE BUTTON */}
-        <button id="login" disabled={disabled}>Log in</button>
-        </label>
+        <Btn id="login" disabled={disabled}>Log in</Btn>
 
+        <FormGroup className="errors">
+          {/* RENDER THE VALIDATION ERRORS HERE */}
+          <div>{loginFormErrors.username}</div>
+          <div>{loginFormErrors.password}</div>
+        </FormGroup>
       </div>
     </form>
+    </PageStyle>
   );
 }

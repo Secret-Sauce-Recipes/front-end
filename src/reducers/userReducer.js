@@ -13,6 +13,7 @@ const initialState = {
   email: "",
   error: "",
   isLoading: false,
+  user_id: "",
 };
 
 export const userReducer = (state = initialState, action) => {

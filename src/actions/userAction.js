@@ -8,10 +8,12 @@ export const REGISTER_LOADING = "REGISTER_LOADING";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
 
+export const USER_LOGOUT = "USER_LOGOUT";
+
 export const registerUser = (regCreds) => (dispatch) => {
   dispatch({ type: REGISTER_LOADING });
   axiosWithAuth()
-    .post("", regCreds)
+    .post("/api/auth/register", regCreds)
     .then((res) => dispatch({ type: REGISTER_SUCCESS, payload: res.data }))
     .catch((err) => {
       dispatch({ type: REGISTER_FAILURE, payload: err });
@@ -21,9 +23,14 @@ export const registerUser = (regCreds) => (dispatch) => {
 export const loginUser = (loginCreds) => (dispatch) => {
   dispatch({ type: LOGIN_LOADING });
   axiosWithAuth()
-    .post("", loginCreds)
+    .post("/api/auth/login", loginCreds)
     .then((res) => dispatch({ type: LOGIN_SUCCESS, payload: res.data }))
     .catch((err) => {
       dispatch({ type: LOGIN_FAILURE, payload: err });
     });
+};
+
+export const logoutUser = () => {
+  window.localStorage.removeItem("token");
+  return { type: USER_LOGOUT };
 };

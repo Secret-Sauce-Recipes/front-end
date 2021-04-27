@@ -22,7 +22,7 @@ const LoginStyle = styled.div`
 const StyledInput = styled.input`
   width: 15rem;
   height: 2.5vh;
-  margin: 0.5rem;
+  margin: 0.49rem;
   padding: 2px;
 `;
 const Btn = styled.button`

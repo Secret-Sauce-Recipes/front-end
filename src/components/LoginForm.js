@@ -18,8 +18,6 @@ const initialLoginErrors = {
 const initialLoginDisabled = true;
 
 export default function Form() {
-// export default function Form(props) {
-  // const { values, submit, change, errors } = props;
 
   // state for login credentials and form errors
   const [loginFormValues, setLoginFormValues] = useState(initialLoginValues);
@@ -34,9 +32,8 @@ export default function Form() {
   const inputChange = (name, value) => {
     // RUN VALIDATION WITH YUP
     yup
-      .reach(schema, name) // get to this part of the schema
-      //we can then run validate using the value
-      .validate(value) // validate this value
+      .reach(schema, name) 
+      .validate(value) 
       .then(() => {
         // happy path and clear the error
         setLoginFormErrors({
@@ -44,8 +41,7 @@ export default function Form() {
           [name]: "",
         });
       })
-      // if the validation is unsuccessful, we can set the error message to the message
-      // returned from yup (that we created in our schema)
+      // add error message each time validation unsuccessful
       .catch((err) => {
         setLoginFormErrors({
           ...loginFormErrors,
@@ -67,8 +63,8 @@ export default function Form() {
       
   const loginSubmit = () => {
     const loginCredentials = {
-      username: loginFormValues.username.trim(),
-      password: loginFormValues.password.trim(),
+    username: loginFormValues.username.trim(),
+    password: loginFormValues.password.trim(),
     };
     // authenticate login
     loginAuthenticate(loginCredentials);
@@ -98,7 +94,6 @@ export default function Form() {
   return (
     <form className="form container" onSubmit={onSubmit}>
 
-
       <div className="login-inputs">
 
        {/* ////////// LOGIN TEXT INPUTS ////////// */}
@@ -125,8 +120,6 @@ export default function Form() {
           <div>{loginFormErrors.username}</div>
           <div>{loginFormErrors.password}</div>
         </div>
-
-
       </div>
     </form>
   );

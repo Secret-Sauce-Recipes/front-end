@@ -98,36 +98,34 @@ export default function Form() {
   return (
     <form className="form container" onSubmit={onSubmit}>
 
+
+      <div className="login-inputs">
+
+       {/* ////////// LOGIN TEXT INPUTS ////////// */}
+          <input
+            value={loginFormValues.username}
+            onChange={onChange}
+            name="username"
+            type="text"
+            placeholder="Username"
+          />
+
+          <input
+            value={loginFormValues.password}
+            onChange={onChange}
+            name="password"
+            type="password"
+            placeholder="Password"
+          />
+        {/* DISABLE THE BUTTON */}
+        <button id="login" disabled={disabled}>Log in</button>
+
         <div className="errors">
           {/* RENDER THE VALIDATION ERRORS HERE */}
           <div>{loginFormErrors.username}</div>
           <div>{loginFormErrors.password}</div>
         </div>
 
-      <div className="login-inputs">
-
-       {/* ////////// LOGIN TEXT INPUTS ////////// */}
-        <label>
-          Username&nbsp;
-          <input
-            value={loginFormValues.username}
-            onChange={onChange}
-            name="username"
-            type="text"
-          />
-        </label>
-
-        <label>
-          Password&nbsp;
-          <input
-            value={loginFormValues.password}
-            onChange={onChange}
-            name="password"
-            type="password"
-          />
-        {/* DISABLE THE BUTTON */}
-        <button id="login" disabled={disabled}>Log in</button>
-        </label>
 
       </div>
     </form>

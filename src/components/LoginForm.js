@@ -1,6 +1,8 @@
-import React, { useState, useEffect }  from "react";
+import React, { useState, useEffect } from "react";
 import schema from "../validation/login-schema";
 import * as yup from "yup";
+import { connect } from "react-redux";
+import { loginUser } from "../actions/userAction";
 
 // Set initial login credentials empty
 const initialLoginValues = {
@@ -17,15 +19,15 @@ const initialLoginErrors = {
 // set login button initially disabled
 const initialLoginDisabled = true;
 
-export default function Form() {
-// export default function Form(props) {
+const LoginForm = () => {
+  // export default function Form(props) {
   // const { values, submit, change, errors } = props;
 
   // state for login credentials and form errors
   const [loginFormValues, setLoginFormValues] = useState(initialLoginValues);
   const [loginFormErrors, setLoginFormErrors] = useState(initialLoginErrors);
   const [disabled, setDisabled] = useState(initialLoginDisabled);
-  
+
   const onChange = (evt) => {
     const { name, value } = evt.target;
     inputChange(name, value);
@@ -53,40 +55,32 @@ export default function Form() {
           [name]: err.errors[0],
         });
       });
-      // finally, update form values with the change
-      setLoginFormValues({
-        ...loginFormValues,
-        [name]: value,
-      });
-    }
-        // on login submit, create credentials object and send to authenticate function
+    // finally, update form values with the change
+    setLoginFormValues({
+      ...loginFormValues,
+      [name]: value,
+    });
+  };
+  // on login submit, create credentials object and send to authenticate function
   const onSubmit = (evt) => {
     evt.preventDefault();
-    loginSubmit();
-  };
-      
-  const loginSubmit = () => {
-    const loginCredentials = {
-      username: loginFormValues.username.trim(),
-      password: loginFormValues.password.trim(),
+    // loginSubmit();
+    const loginCreds = {
+      username: loginFormValues.username,
+      password: loginFormValues.password,
     };
-    // authenticate login
-    loginAuthenticate(loginCredentials);
+    loginUser(loginCreds);
   };
 
-  // STUB TO AUTHENTICATE VIA AXIOS
-  const loginAuthenticate = (loginCredentials) => {
-    // axios
-    //   .post("https://xxxxxx", loginCredentials)
-    //   .then((res) => {
-    // //    reset form
-        setLoginFormValues(initialLoginValues);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     debugger;
-    //   });
-  };
+  // const loginSubmit = () => {
+  //   const loginCredentials = {
+  //     username: loginFormValues.username.trim(),
+  //     password: loginFormValues.password.trim(),
+  //   };
+  //   // authenticate login
+  //   loginAuthenticate(loginCredentials);
+  // };
+
   useEffect(() => {
     // ADJUST THE STATUS OF `disabled` EVERY TIME `loginFormValues` CHANGES
     schema.isValid(loginFormValues).then((valid) => {
@@ -94,19 +88,16 @@ export default function Form() {
     });
   }, [loginFormValues]);
 
-
   return (
     <form className="form container" onSubmit={onSubmit}>
-
-        <div className="errors">
-          {/* RENDER THE VALIDATION ERRORS HERE */}
-          <div>{loginFormErrors.username}</div>
-          <div>{loginFormErrors.password}</div>
-        </div>
+      <div className="errors">
+        {/* RENDER THE VALIDATION ERRORS HERE */}
+        <div>{loginFormErrors.username}</div>
+        <div>{loginFormErrors.password}</div>
+      </div>
 
       <div className="login-inputs">
-
-       {/* ////////// LOGIN TEXT INPUTS ////////// */}
+        {/* ////////// LOGIN TEXT INPUTS ////////// */}
         <label>
           Username&nbsp;
           <input
@@ -125,11 +116,20 @@ export default function Form() {
             name="password"
             type="password"
           />
-        {/* DISABLE THE BUTTON */}
-        <button id="login" disabled={disabled}>Log in</button>
+          {/* DISABLE THE BUTTON */}
+          <button id="login" disabled={disabled}>
+            Log in
+          </button>
         </label>
-
       </div>
     </form>
   );
-}
+};
+const mapStateToProps = (state) => {
+  return {
+    username: state.username,
+    password: state.password,
+  };
+};
+
+export default connect(mapStateToProps, { loginUser })(LoginForm);

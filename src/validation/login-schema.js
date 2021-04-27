@@ -6,7 +6,7 @@ export default yup.object().shape({
     .string()
     .required("username is required")
     .min(6, "username must be 6 chars long"),
-password: yup
+    password: yup
     .string()
     .matches(
       /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,

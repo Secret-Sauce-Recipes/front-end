@@ -5,7 +5,7 @@ import {
   LOGIN_LOADING,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-} from "../actions/userActions";
+} from "../actions/userAction";
 
 const initialState = {
   username: "",

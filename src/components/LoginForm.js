@@ -5,12 +5,14 @@ import styled from 'styled-components'
 
 // STYLES COPIED FROM AddRecipe.js - SHOULD BE REFACTORED
 //Styles
-const PageStyle = styled.div`
+// Had to change flex-direction from PageStyle, so renamed it LoginStyle
+const LoginStyle = styled.div`
     box-sizing: border-box;
     background-color:#fefae0;
     width:100%;
     border: 1px solid blue;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     `
 const StyledInput = styled.input`
@@ -20,17 +22,20 @@ const StyledInput = styled.input`
     padding:2px;
 `
 const Btn = styled.button`
-     display: flex;
-     justify-content: center;
+    //  display: flex;
+    //  justify-content: center;
     background-color: #E07A5F;
-     width: 10%;
+    width: 10%;
     height: 5vh;
-     align-content:center;
-     align-items: center;
-    font-size: 1rem;
+    //  align-content:center;
+    //  align-items: center;
+    // font-size: 1rem;
+    margin:.5rem;
+    padding:2px;
 `
-const FormGroup = styled.div`
-	color: black;
+
+const ValidationErrs = styled.div`
+	color: red;
     font-family: sans-serif;
     font-size: 1rem;
     font-weight: bold;
@@ -39,7 +44,7 @@ const FormGroup = styled.div`
 	width: 50%;
     margin: 0 auto;
     justify-content: center;
-    border: 1px solid red;
+    // border: 1px solid red;
 `
 
 // Set initial login credentials empty
@@ -132,12 +137,13 @@ export default function Form() {
 
 
   return (
-    <PageStyle>
+
     <form className="form container" onSubmit={onSubmit}>
 
       <div className="login-inputs">
 
        {/* ////////// LOGIN TEXT INPUTS ////////// */}
+       <LoginStyle>
           <StyledInput
             value={loginFormValues.username}
             onChange={onChange}
@@ -156,13 +162,14 @@ export default function Form() {
         {/* DISABLE THE BUTTON */}
         <Btn id="login" disabled={disabled}>Log in</Btn>
 
-        <FormGroup className="errors">
+        <ValidationErrs className="errors">
           {/* RENDER THE VALIDATION ERRORS HERE */}
           <div>{loginFormErrors.username}</div>
           <div>{loginFormErrors.password}</div>
-        </FormGroup>
+        </ValidationErrs>
+        </LoginStyle>
       </div>
     </form>
-    </PageStyle>
+   
   );
 }

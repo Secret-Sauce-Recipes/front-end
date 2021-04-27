@@ -18,12 +18,13 @@ const initialLoginErrors = {
 const initialLoginDisabled = true;
 
 export default function Form() {
+// export default function Form(props) {
+  // const { values, submit, change, errors } = props;
 
   // state for login credentials and form errors
   const [loginFormValues, setLoginFormValues] = useState(initialLoginValues);
   const [loginFormErrors, setLoginFormErrors] = useState(initialLoginErrors);
-  const [disabled, setDisabled] = useState(initialLoginDisabled); // boolean
-
+  const [disabled, setDisabled] = useState(initialLoginDisabled);
   
   const onChange = (evt) => {
     const { name, value } = evt.target;
@@ -33,7 +34,8 @@ export default function Form() {
   const inputChange = (name, value) => {
     // RUN VALIDATION WITH YUP
     yup
-      .reach(schema, name)
+      .reach(schema, name) // get to this part of the schema
+      //we can then run validate using the value
       .validate(value) // validate this value
       .then(() => {
         // happy path and clear the error
@@ -97,7 +99,7 @@ export default function Form() {
     <form className="form container" onSubmit={onSubmit}>
 
         <div className="errors">
-          {/* 🔥 RENDER THE VALIDATION ERRORS HERE */}
+          {/* RENDER THE VALIDATION ERRORS HERE */}
           <div>{loginFormErrors.username}</div>
           <div>{loginFormErrors.password}</div>
         </div>
@@ -131,4 +133,3 @@ export default function Form() {
     </form>
   );
 }
-

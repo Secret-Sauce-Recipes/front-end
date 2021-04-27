@@ -14,9 +14,9 @@ function App() {
       <Route exact path="/">
         <Landing />
       </Route>
-      <Route>
+      {/* <Route>
         <LoginForm />
-      </Route>
+      </Route> */}
       <Route>
         <RegisterForm />
       </Route>

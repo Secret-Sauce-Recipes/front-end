@@ -1,10 +1,16 @@
-import "./App.css";
+import React from "react";
+import AddRecipe from './components/AddRecipe'
+
+
+
+
 
 function App() {
   return (
     <div className="App">
-      <h1>HEY!!!</h1>
+      <AddRecipe/>
     </div>
+
   );
 }
 

@@ -1,4 +1,4 @@
-import {REGISTER_LOADING, REGISTER_SUCCESS, REGISTER_FAIL} from '../actions/registerFormActions'
+import {REGISTER_LOADING, REGISTER_SUCCESS, REGISTER_ERROR} from '../actions/registerFormActions'
 
 const initialState = {
     username: "",
@@ -24,7 +24,7 @@ export const registerFormReducer = ( state = initialState, action ) => {
              email: action.payload.email,
              isLoading: false
          }
-        case REGISTER_FAIL:
+        case REGISTER_ERROR:
             return {
                 ...state,
                 isLoading: false,

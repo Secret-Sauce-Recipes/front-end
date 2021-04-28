@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import schema from "../validation/login-schema";
 import * as yup from "yup";
-
 import { connect } from "react-redux";
 import { loginUser } from "../actions/userAction";
 
@@ -127,6 +126,7 @@ const LoginForm = () => {
   // };
 
   useEffect(() => {
+    console.log("useEffect")
     // ADJUST THE STATUS OF `disabled` EVERY TIME `loginFormValues` CHANGES
     schema.isValid(loginFormValues).then((valid) => {
       setDisabled(!valid);

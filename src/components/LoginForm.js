@@ -3,52 +3,53 @@ import schema from "../validation/login-schema";
 import * as yup from "yup";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/userAction";
+import style from "../style/component-styles"
 
-import styled from "styled-components";
+// import styled from "styled-components";
 
-// STYLES COPIED FROM AddRecipe.js - SHOULD BE REFACTORED
-//Styles
-// Had to change flex-direction from PageStyle, so renamed it LoginStyles
-const LoginStyle = styled.div`
-  box-sizing: border-box;
-  background-color: #fefae0;
-  width: 100%;
-  border: 1px solid blue;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-const StyledInput = styled.input`
-  width: 15rem;
-  height: 2.5vh;
-  margin: 0.5rem;
-  padding: 2px;
-`;
-const Btn = styled.button`
-  //  display: flex;
-  //  justify-content: center;
-  background-color: #e07a5f;
-  width: 10%;
-  height: 5vh;
-  //  align-content:center;
-  //  align-items: center;
-  // font-size: 1rem;
-  margin: 0.5rem;
-  padding: 2px;
-`;
+// // STYLES COPIED FROM AddRecipe.js - SHOULD BE REFACTORED
+// //Styles
+// // Had to change flex-direction from PageStyle, so renamed it LoginStyles
+// const LoginStyle = styled.div`
+//   box-sizing: border-box;
+//   background-color: #fefae0;
+//   width: 100%;
+//   border: 1px solid blue;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+// `;
+// const StyledInput = styled.input`
+//   width: 15rem;
+//   height: 2.5vh;
+//   margin: 0.5rem;
+//   padding: 2px;
+// `;
+// const Btn = styled.button`
+//   //  display: flex;
+//   //  justify-content: center;
+//   background-color: #e07a5f;
+//   width: 10%;
+//   height: 5vh;
+//   //  align-content:center;
+//   //  align-items: center;
+//   // font-size: 1rem;
+//   margin: 0.5rem;
+//   padding: 2px;
+// `;
 
-const ValidationErrs = styled.div`
-  color: red;
-  font-family: sans-serif;
-  font-size: 1rem;
-  font-weight: bold;
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  margin: 0 auto;
-  justify-content: center;
-  // border: 1px solid red;
-`;
+// const ValidationErrs = styled.div`
+//   color: red;
+//   font-family: sans-serif;
+//   font-size: 1rem;
+//   font-weight: bold;
+//   display: flex;
+//   flex-direction: column;
+//   width: 50%;
+//   margin: 0 auto;
+//   justify-content: center;
+//   // border: 1px solid red;
+// `;
 
 // Set initial login credentials empty
 const initialLoginValues = {
@@ -126,7 +127,6 @@ const LoginForm = () => {
   // };
 
   useEffect(() => {
-    console.log("useEffect")
     // ADJUST THE STATUS OF `disabled` EVERY TIME `loginFormValues` CHANGES
     schema.isValid(loginFormValues).then((valid) => {
       setDisabled(!valid);
@@ -137,34 +137,37 @@ const LoginForm = () => {
     <form className="form container" onSubmit={onSubmit}>
       <div className="login-inputs">
         {/* ////////// LOGIN TEXT INPUTS ////////// */}
-        <LoginStyle>
-          <StyledInput
+        <style.LoginStyle>
+          <style.StyledInput
             value={loginFormValues.username}
             onChange={onChange}
             name="username"
             type="text"
             placeholder="Username"
           />
+          <style.ValidationErrs>{loginFormErrors.username}</style.ValidationErrs>
 
-          <StyledInput
+          <style.StyledInput
             value={loginFormValues.password}
             onChange={onChange}
             name="password"
             type="password"
             placeholder="Password"
           />
+          <style.ValidationErrs>{loginFormErrors.password}</style.ValidationErrs>
+
 
           {/* DISABLE THE BUTTON */}
-          <Btn id="login" disabled={disabled}>
+          <style.Btn disabled={disabled}>
             Log in
-          </Btn>
+          </style.Btn>
 
-          <ValidationErrs className="errors">
-            {/* RENDER THE VALIDATION ERRORS HERE */}
+          {/* RENDER THE VALIDATION ERRORS HERE */}
+          {/* <style.ValidationErrs className="errors">
             <div>{loginFormErrors.username}</div>
             <div>{loginFormErrors.password}</div>
-          </ValidationErrs>
-        </LoginStyle>
+          </style.ValidationErrs> */}
+        </style.LoginStyle>
       </div>
     </form>
   );

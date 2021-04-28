@@ -6,13 +6,15 @@ import LoginForm from "./components/LoginForm";
 import Landing from "./components/Landing";
 import NavBar from "./components/NavBar";
 import LoggedInLanding from "./components/LoggedInLanding";
+import AddRecipe from './components/AddRecipe'
 
 function App() {
   return (
     <div className="App">
       <NavBar />
       <Route exact path="/">
-        <Landing />
+        {/* <Landing /> */}
+          <AddRecipe />
       </Route>
       <Route>
         <LoginForm />

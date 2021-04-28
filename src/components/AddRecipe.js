@@ -1,5 +1,8 @@
-import React, {useState} from "react";
-import styled from 'styled-components'
+import React, {useState, useEffect} from "react";
+import styled from 'styled-components';
+import * as yup from "yup";
+import  schema from '../validation/Add-Schema'
+import axios from 'axios'
 
 //Styles
 const PageStyle = styled.div`
@@ -38,14 +41,14 @@ const StyledH3 = styled.h3`
     height: 1vh;
     display:flex;
     justify-content: left;
-    color: black;
+    color: #3D405B;
     font-family: sans-serif;
     font-size: 2rem;
     font-weight: bold;
 `    
-
 const StyledFirstDiv = styled.div`
-    border: 1.5px solid black;
+    border: 3px inset #81B29A;
+    border-radius:10px;
     display: flex;
     flex-direction: column;
     padding: 1rem;
@@ -53,50 +56,45 @@ const StyledFirstDiv = styled.div`
     width:60%;
 `
 const StyledSecondDiv = styled.div`
-     //border: 1.5px solid black;
+     border: 3px inset #81B29A;
+     border-radius:10px;
     display: flex;
     flex-direction: column;
-     padding:1rem;
+    //  padding:1rem;
     align-items: left;
     width:65%;
-    padding:.5rem;
+    // padding:.5rem;
 `
 const StyledThirdDiv = styled.div`
     //border: 1.5px solid black;
+    border-radius:10px;
+    border: 3px inset #81B29A;
     display: flex;
     flex-direction: column;
-    padding: 1.5rem;
+    // padding: 1.5rem;
     align-items: left;
-    //margin: 1.5rem;
-    width:65%;
+     width:65%;
 `
 const StyledInput = styled.input`
     width: 15rem;
-    height: 2.5vh;
+    height: 2vh;
     margin:.5rem;
      //padding:2px;
 `
 const StyledTextArea = styled.textarea`
-    width: 20rem;
-    height: 25vh;
-    width:100%;
+    height: 30vh;
+    width:99%;
     resize: none;
+    border:none;
+    padding:0;
 `
 const StyledLabel = styled.label`
-
-margin-right:4rem;
-`
-const StyledDate =styled.input`
- margin:.5rem 3.8rem;
-width: 15rem;
-height: 2.5vh;
- //margin:.5rem;
-padding:2px;
+    margin-right:4rem;
 `
 const StyledCategory =styled.input`
- margin:.5rem 2rem;
+ margin:.5rem 2.5rem;
 width: 15rem;
-height: 2.5vh;
+height: 2vh;
  //margin:.5rem;
 padding:2px;
 `
@@ -114,48 +112,133 @@ const ButtonDiv = styled.div`
     padding: 1.5rem;
     align-items: center;
     margin: 1.5rem;
+    
 `
 const Btn = styled.button`
      display: flex;
      justify-content: center;
     background-color: #81B29A;
     
-    height: 5vh;
+    height: 3vh;
      align-content:center;
      align-items: center;
     font-size: 1rem;
+`
+const StyledBtn = styled.button`
+    height: 3vh;
+    align-content:center;
+    margin:.5rem ;
+    width: 15rem;
+    height: 2.5vh;
+`
+
+const StyledDd = styled.select`
+margin:.5rem 3rem;
+width: 16rem;
+height: 2.5vh;
+ //margin:.5rem;
+padding:2px;
 `
 
 
 const recipeObj = 
 {
-recipe_id:0,
-recipe_name: "",
-ingredients: [{
-ingredient_name: "",
-ingredient_quantity: 0,
-ingredient_unit:""
-}],
-source: '',
-instructions: [{
-instruction_id: 0,
-instruction_text: ''
-}],
-categories: []
-}
+    recipe_id:'',
+    recipe_name:'',
+    recipe_img:'',
+    ingredients:'',
+    source:'',
+    instructions:'',
+    categories:''
+    }
+ const initialFormValues = {
+        recipe_name:'',
+        recipe_img:'',
+        ingredients:'',
+        source:'',
+        instructions:'',
+        categories:''
+      };
 
+const initialFormErrors = {
+        recipe_name: "",
+        ingredients: "",
+        instructions: "",
+        categories: "",
+      };
 
+    const initialDisabled = true;
 
 
 export default function AddRecipe(){
 const [recipe, setRecipe] = useState(recipeObj);
+const [formValues, setFormValues] = useState(initialFormValues); 
+const [formErrors, setFormErrors] = useState(initialFormErrors); 
+const [disabled, setDisabled] = useState(initialDisabled); 
+
 const onSubmit = (evt) => {
     evt.preventDefault();
+    const newRecipe = {
+        recipe_name: formValues.recipe_name.trim(),
+        recipe_img: formValues.recipe_img.trim(),
+        ingredients: formValues.ingredients.trim(),
+        source: formValues.source.trim(),
+        instructions: formValues.instructions.trim(),
+        categories: formValues.categories,
+    }
+     //ToDO
+    //  postNewRecipe(newRecipe);
+    setFormValues({...recipe,newRecipe});
+    setFormValues(initialFormValues);
+   
+
   };
+  //ToDO
+  //Post stub
+  const postNewRecipe = (newRecipe) => {
+    axios
+      .post("", newRecipe)
+      .then((res) => {
+        setRecipe([res.data, ...recipeObj]);
+        setFormValues(initialFormValues);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+   
+    schema.isValid(formValues).then((valid) => {
+      setDisabled(!valid);
+      
+    });
+  }, [formValues]);
 
   const onChange = (evt) => {
      const { name, value } = evt.target;
     setRecipe({...recipe,[name]:value});
+    yup
+    .reach(schema, name) 
+    .validate(value) 
+    .then(() => {
+      setFormErrors({
+        ...formErrors,
+        [name]: "",
+      });
+    })
+    .catch((err) => {
+      setFormErrors({
+        ...formErrors,
+        [name]: err.errors[0],
+      });
+    });
+
+    setFormValues({
+        ...formValues,
+        [name]: value, 
+      });
+    
   };
   
     return(
@@ -165,43 +248,48 @@ const onSubmit = (evt) => {
         <StyledH2>Add  New Recipe</StyledH2>
         </div>
         <StyledFirstDiv>
+    
             <label>
-                Date : &nbsp;
-                <StyledDate
-                    value={recipe.date}
+                Recipe Name :&nbsp;
+                <StyledInput
+                    value={recipe.recipe_name}
                     onChange={onChange}
-                    name="date"
+                    name="recipe_name"
                     type="text"
                 />
+                <div> {formErrors.recipe_name}</div>
+            </label>
+            <label>
+            {/* <label for="avatar">Choose a profile picture:</label> */}
+                Recipe Image :&nbsp;
+                <StyledInput type="file" id="avatar" name="avatar"
+                accept="image/png, image/jpeg"></StyledInput>
             </label>
             
             <label>
-                Username :&nbsp;
-                <StyledInput2
-                    value={recipe.username}
-                    onChange={onChange}
-                    name="username"
-                    type="text"
-                />
-            </label>
-            <label>
-                Recipename :&nbsp;
+                Source Name :&nbsp;
                 <StyledInput
-                    value={recipe.recipename}
+                    value={recipe.source}
                     onChange={onChange}
-                    name="recipename"
+                    name="source"
                     type="text"
                 />
+                
             </label>
-            <label>
-                Category :&nbsp;
-                <StyledCategory
-                    value={recipe.category}
-                    onChange={onChange}
-                    name="category"
-                    type="text"
-                />
-                </label>
+
+                <label for="Category">Category:
+
+                    <StyledDd name="categories" id="categories" onChange={onChange} value={recipe.categories}>
+                    <option value="choice">Choose a Category</option>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="brunch">Brunch</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="snack">Snack</option>
+                    <option value="dinner">Dinner</option>
+                    </StyledDd>
+                    <div> {formErrors.categories}</div>
+                    </label>
+                   
             </StyledFirstDiv>
             <div>
                 <StyledH3>Ingredients</StyledH3>
@@ -209,11 +297,12 @@ const onSubmit = (evt) => {
         <StyledSecondDiv> 
             <label>
                 <StyledTextArea
-                    value={recipe.ingredients_name}
+                    value={recipe.ingredients}
                     onChange={onChange}
                     name="ingredients"
                     type="text"
                 />
+                 <div> {formErrors.ingredients}</div>
             </label>
         </StyledSecondDiv>
         <div>
@@ -222,15 +311,16 @@ const onSubmit = (evt) => {
         <StyledThirdDiv>        
             <label>
             <StyledTextArea
-                value={recipe.instruction_text}
+                value={recipe.instructions}
                 onChange={onChange}
                 name="instructions"
                 type="text"
             />
+             <div> {formErrors.instructions}</div>
             </label>
         </StyledThirdDiv>
         <ButtonDiv>
-            <Btn>Add Recipe</Btn>
+            <Btn disabled={disabled} >Add Recipe</Btn>
         </ButtonDiv>
     </FormGroup>
        

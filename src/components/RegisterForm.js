@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import schema from "../validation/login-schema";
 import * as yup from "yup";
-import style from "../style/component-styles"
-
+import { LoginStyle, StyledInput, Btn, ValidationErrs } from "../style/component-styles"
 
 const StyledDiv = styled.div``;
 // STYLES COPIED FROM AddRecipe.js - SHOULD BE REFACTORED
@@ -108,36 +107,36 @@ export default function RegisterForm() {
   }, [register]);
 
   return (
-    <style.LoginStyle>
+    <LoginStyle>
       <form onSubmit={submitHandler}>
-        <style.StyledInput
+        <StyledInput
           type="text"
           name="username"
           placeholder="Username"
           onChange={handleChange}
           value={register.username}
         />
-        <style.ValidationErrs>{regFormErrors.username}</style.ValidationErrs>
+        <ValidationErrs>{regFormErrors.username}</ValidationErrs>
 
-        <style.StyledInput
+        <StyledInput
           type="text"
           name="email"
           placeholder="Email"
           onChange={handleChange}
           value={register.email}
           />
-          <style.ValidationErrs>{regFormErrors.email}</style.ValidationErrs>
+          <ValidationErrs>{regFormErrors.email}</ValidationErrs>
  
-        <style.StyledInput
+        <StyledInput
           type="password"
           name="password"
           placeholder="Password"
           onChange={handleChange}
           value={register.password}
         />
-        <style.ValidationErrs>{regFormErrors.password}</style.ValidationErrs>
+        <ValidationErrs>{regFormErrors.password}</ValidationErrs>
 
-        <style.Btn disabled={disabled}>Register</style.Btn>
+        <Btn disabled={disabled}>Register</Btn>
 
           {/* RENDER THE VALIDATION ERRORS HERE */}
           {/* <style.ValidationErrs className="errors">
@@ -147,6 +146,6 @@ export default function RegisterForm() {
           </style.ValidationErrs> */}
 
       </form>
-    </style.LoginStyle>
+    </LoginStyle>
   );
 }

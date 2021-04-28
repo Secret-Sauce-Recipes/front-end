@@ -3,7 +3,7 @@ import schema from "../validation/login-schema";
 import * as yup from "yup";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/userAction";
-import { LoginStyle, StyledInput, Btn, ValidationErrs } from "../style/component-styles"
+import { LoginStyle, StyledInput, Btn, ValidationErrs, ButtonDiv } from "../style/component-styles"
 
 
 
@@ -114,9 +114,11 @@ const LoginForm = () => {
 
 
           {/* DISABLE THE BUTTON */}
-          <Btn disabled={disabled}>
-            Log in
-          </Btn>
+          <ButtonDiv>
+            <Btn disabled={disabled}>
+              Log in
+            </Btn>
+          </ButtonDiv>
 
         </LoginStyle>
       </div>

@@ -1,46 +1,11 @@
-import React, { useState, useEffect }  from "react";
+import React, { useState, useEffect } from "react";
 import schema from "../validation/login-schema";
 import * as yup from "yup";
-import styled from 'styled-components'
+import { connect } from "react-redux";
+import { loginUser } from "../actions/userAction";
+import { LoginStyle, StyledInput, Btn, ValidationErrs, ButtonDiv } from "../style/component-styles"
 
-// STYLES COPIED FROM AddRecipe.js - SHOULD BE REFACTORED
-//Styles
-const PageStyle = styled.div`
-    box-sizing: border-box;
-    background-color:#fefae0;
-    width:100%;
-    border: 1px solid blue;
-    display: flex;
-    justify-content: center;
-    `
-const StyledInput = styled.input`
-    width: 15rem;
-    height: 2.5vh;
-    margin:.5rem;
-    padding:2px;
-`
-const Btn = styled.button`
-     display: flex;
-     justify-content: center;
-    background-color: #E07A5F;
-     width: 10%;
-    height: 5vh;
-     align-content:center;
-     align-items: center;
-    font-size: 1rem;
-`
-const FormGroup = styled.div`
-	color: black;
-    font-family: sans-serif;
-    font-size: 1rem;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-	width: 50%;
-    margin: 0 auto;
-    justify-content: center;
-    border: 1px solid red;
-`
+
 
 // Set initial login credentials empty
 const initialLoginValues = {
@@ -57,13 +22,15 @@ const initialLoginErrors = {
 // set login button initially disabled
 const initialLoginDisabled = true;
 
-export default function Form() {
+const LoginForm = () => {
+  // export default function Form(props) {
+  // const { values, submit, change, errors } = props;
 
   // state for login credentials and form errors
   const [loginFormValues, setLoginFormValues] = useState(initialLoginValues);
   const [loginFormErrors, setLoginFormErrors] = useState(initialLoginErrors);
   const [disabled, setDisabled] = useState(initialLoginDisabled);
-  
+
   const onChange = (evt) => {
     const { name, value } = evt.target;
     inputChange(name, value);
@@ -72,8 +39,8 @@ export default function Form() {
   const inputChange = (name, value) => {
     // RUN VALIDATION WITH YUP
     yup
-      .reach(schema, name) 
-      .validate(value) 
+      .reach(schema, name)
+      .validate(value)
       .then(() => {
         // happy path and clear the error
         setLoginFormErrors({
@@ -89,40 +56,32 @@ export default function Form() {
           [name]: err.errors[0],
         });
       });
-      // finally, update form values with the change
-      setLoginFormValues({
-        ...loginFormValues,
-        [name]: value,
-      });
-    }
-        // on login submit, create credentials object and send to authenticate function
+    // finally, update form values with the change
+    setLoginFormValues({
+      ...loginFormValues,
+      [name]: value,
+    });
+  };
+  // on login submit, create credentials object and send to authenticate function
   const onSubmit = (evt) => {
     evt.preventDefault();
-    loginSubmit();
-  };
-      
-  const loginSubmit = () => {
-    const loginCredentials = {
-    username: loginFormValues.username.trim(),
-    password: loginFormValues.password.trim(),
+
+    const loginCreds = {
+      username: loginFormValues.username.trim(),
+      password: loginFormValues.password.trim(),
     };
-    // authenticate login
-    loginAuthenticate(loginCredentials);
+    loginUser(loginCreds);
   };
 
-  // STUB TO AUTHENTICATE VIA AXIOS
-  const loginAuthenticate = (loginCredentials) => {
-    // axios
-    //   .post("https://xxxxxx", loginCredentials)
-    //   .then((res) => {
-    // //    reset form
-        setLoginFormValues(initialLoginValues);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     debugger;
-    //   });
-  };
+  // const loginSubmit = () => {
+  //   const loginCredentials = {
+  //     username: loginFormValues.username.trim(),
+  //     password: loginFormValues.password.trim(),
+  //   };
+  //   // authenticate login
+  //   loginAuthenticate(loginCredentials);
+  // };
+
   useEffect(() => {
     // ADJUST THE STATUS OF `disabled` EVERY TIME `loginFormValues` CHANGES
     schema.isValid(loginFormValues).then((valid) => {
@@ -130,14 +89,11 @@ export default function Form() {
     });
   }, [loginFormValues]);
 
-
   return (
-    <PageStyle>
     <form className="form container" onSubmit={onSubmit}>
-
       <div className="login-inputs">
-
-       {/* ////////// LOGIN TEXT INPUTS ////////// */}
+        {/* ////////// LOGIN TEXT INPUTS ////////// */}
+        <LoginStyle>
           <StyledInput
             value={loginFormValues.username}
             onChange={onChange}
@@ -145,6 +101,7 @@ export default function Form() {
             type="text"
             placeholder="Username"
           />
+          <ValidationErrs>{loginFormErrors.username}</ValidationErrs>
 
           <StyledInput
             value={loginFormValues.password}
@@ -153,16 +110,26 @@ export default function Form() {
             type="password"
             placeholder="Password"
           />
-        {/* DISABLE THE BUTTON */}
-        <Btn id="login" disabled={disabled}>Log in</Btn>
+          <ValidationErrs>{loginFormErrors.password}</ValidationErrs>
 
-        <FormGroup className="errors">
-          {/* RENDER THE VALIDATION ERRORS HERE */}
-          <div>{loginFormErrors.username}</div>
-          <div>{loginFormErrors.password}</div>
-        </FormGroup>
+
+          {/* DISABLE THE BUTTON */}
+          <ButtonDiv>
+            <Btn disabled={disabled}>
+              Log in
+            </Btn>
+          </ButtonDiv>
+
+        </LoginStyle>
       </div>
     </form>
-    </PageStyle>
   );
-}
+};
+const mapStateToProps = (state) => {
+  return {
+    username: state.username,
+    password: state.password,
+  };
+};
+
+export default connect(mapStateToProps, { loginUser })(LoginForm);

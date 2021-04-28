@@ -6,7 +6,7 @@ import LoginForm from "./components/LoginForm";
 import Landing from "./components/Landing";
 import NavBar from "./components/NavBar";
 import LoggedInLanding from "./components/LoggedInLanding";
-import AddRecipe from './components/AddRecipe'
+import AddRecipe from "./components/AddRecipe";
 
 function App() {
   return (
@@ -22,7 +22,8 @@ function App() {
       <Route>
         <RegisterForm />
       </Route>
-      {/* <PrivateRoute path="/loggedInLanding" component={}/> */}
+      <PrivateRoute exact path="/loggedInLanding" component={LoggedInLanding} />
+      <PrivateRoute path="/addRecipe" component={AddRecipe} />
     </div>
   );
 }

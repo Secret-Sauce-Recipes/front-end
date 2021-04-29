@@ -3,7 +3,7 @@ import schema from "../validation/login-schema";
 import * as yup from "yup";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/userAction";
-import { LoginStyle, StyledInput, Btn, ValidationErrs, ButtonDiv, LoginFirstDiv, FormGroup } from "../style/component-styles";
+import { StyledInput, LoginBtn, ValidationErrs, ButtonDiv, LoginFirstDiv, FormGroup, LoginFormDiv } from "../style/component-styles";
 
 // Set initial login credentials empty
 const initialLoginValues = {
@@ -78,12 +78,14 @@ const LoginForm = () => {
 
   return (
     <form className="form container" onSubmit={onSubmit}>
-      {/* <div className="login-inputs"> */}
+      {/* <LoginFormDiv /> */}
+      <div className="login-inputs">
         {/* ////////// LOGIN TEXT INPUTS ////////// */}
         {/* <LoginStyle> */}
           {/* <FormGroup> */}
-          <LoginFirstDiv>
+          {/* <LoginFirstDiv> */}
           <StyledInput
+          // <input
             value={loginFormValues.username}
             onChange={onChange}
             name="username"
@@ -91,8 +93,10 @@ const LoginForm = () => {
             placeholder="Username"
           />
           <ValidationErrs>{loginFormErrors.username}</ValidationErrs>
+          {/* <div>{loginFormErrors.username}</div> */}
 
           <StyledInput
+          //  <input
             value={loginFormValues.password}
             onChange={onChange}
             name="password"
@@ -100,18 +104,15 @@ const LoginForm = () => {
             placeholder="Password"
           />
           <ValidationErrs>{loginFormErrors.password}</ValidationErrs>
-          </LoginFirstDiv>
+          {/* <div>{loginFormErrors.password}</div> */}
 
 
           {/* DISABLE THE BUTTON */}
-          <ButtonDiv>
-            <Btn disabled={disabled}>
-              Log in
-            </Btn>
-          </ButtonDiv>
-        {/* </FormGroup> */}
-        {/* </LoginStyle> */}
+          <LoginBtn disabled={disabled}>Log in</LoginBtn>
+          </div>
+          {/* </LoginFormDiv> */}
    </form>
+ 
   );
 };
 const mapStateToProps = (state) => {

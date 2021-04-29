@@ -32,7 +32,7 @@ const FormGroup = styled.div`
   margin: 0 auto;
   justify-content: center;
   border: 1px solid #3D405B;
-  align-items:center;
+  align-items: center;
   `;
 const StyledH2 = styled.h2`
   height: 2vh;
@@ -44,6 +44,19 @@ const StyledH2 = styled.h2`
   font-weight: bold;
   `;
     // Had to change flex-direction from PageStyle, so renamed it LoginStyle
+const LandingStyle = styled.div`
+  color: #3D405B;
+  font-family: sans-serif;
+  box-sizing: border-box;
+  background-color: #fefae0;
+  width: 100%;
+  // border: 1px solid blue;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  justify-content: center;
+`;
 const LoginStyle = styled.div`
   box-sizing: border-box;
   background-color: #fefae0;
@@ -55,6 +68,12 @@ const LoginStyle = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
+const LoginFormDiv = styled.div`
+  box-sizing: border-box;
+  background-color: #fefae0;
+  width: 15rem;
+`;
+
 const StyledInput = styled.input`
     width: 15rem;
     height: 2vh;
@@ -71,13 +90,21 @@ const ButtonDiv = styled.div`
     margin: 1.5rem;
 `
 const Btn = styled.button`
-   display: flex;
-   justify-content: center;
+  display: flex;
+  justify-content: center;
   background-color: #e07a5f;
   width: 100%;
   height: 5vh;
-   align-content:center;
-   align-items: center;
+  align-content:center;
+  align-items: center;
+  font-size: 1rem;
+  margin: 0.5rem;
+  padding: 2px;
+`;
+const LoginBtn = styled.button`
+  background-color: #e07a5f;
+  width: 25%;
+  height: 5vh;
   font-size: 1rem;
   margin: 0.5rem;
   padding: 2px;
@@ -88,7 +115,7 @@ const ValidationErrs = styled.div`
   font-family: sans-serif;
   font-size: .75rem;
   font-weight: bold;
-  width: 50%;
+  width: 15rem;
   margin: 0 auto;
 //   text-align: left;
   align-items: left;
@@ -96,4 +123,4 @@ const ValidationErrs = styled.div`
   // border: 1px solid red;
 `;
 
-export { LoginStyle, StyledInput, Btn, ValidationErrs, ButtonDiv, StyledH2, FormGroup, StyledFirstDiv, LoginFirstDiv };
+export { LandingStyle, LoginFormDiv, LoginStyle, StyledInput, Btn, ValidationErrs, ButtonDiv, StyledH2, FormGroup, StyledFirstDiv, LoginFirstDiv, LoginBtn };

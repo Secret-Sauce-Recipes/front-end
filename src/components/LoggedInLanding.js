@@ -1,11 +1,13 @@
-import { connect } from "react-redux";
-import { getRecipe } from "../actions/recipeActions";
-import { useEffect } from "react";
+import { connect } from 'react-redux';
+import { getRecipe } from '../actions/recipeActions';
+import { useEffect } from 'react';
 
 const LoggedInLanding = (props) => {
+  const { getRecipe } = props;
+
   useEffect(() => {
-    props.getRecipe();
-  }, []);
+    getRecipe();
+  }, [getRecipe]);
 
   return <div>{props.getRecipe}</div>;
 };

@@ -1,24 +1,29 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import schema from "../validation/login-schema";
-import * as yup from "yup";
-import { LoginFormDiv, LoginStyle, StyledInput, ButtonDiv, Btn, ValidationErrs } from "../style/component-styles"
-import { registerUser } from "../actions/userAction";
-import { connect } from "react-redux";
-import { useHistory } from "react-router";
+import React, { useState, useEffect } from 'react';
+import schema from '../validation/login-schema';
+import * as yup from 'yup';
+import {
+  LoginFormDiv,
+  LoginStyle,
+  StyledInput,
+  ButtonDiv,
+  Btn,
+  ValidationErrs,
+} from '../style/component-styles';
+import { registerUser } from '../actions/userAction';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
 
 const initialValues = {
-  username: "",
-  password: "",
-  email: "",
+  username: '',
+  password: '',
+  email: '',
 };
 
 const initialRegErrors = {
-  username: "",
-  password: "",
-  email: "",
+  username: '',
+  password: '',
+  email: '',
 };
-
 
 const initialRegDisabled = true;
 
@@ -27,7 +32,7 @@ const RegisterForm = (props) => {
   const [regFormErrors, setRegFormErrors] = useState(initialRegErrors);
   const [disabled, setDisabled] = useState(initialRegDisabled);
   const { push } = useHistory();
-  
+
   const handleChange = (e) => {
     setRegister({
       ...register,
@@ -40,7 +45,7 @@ const RegisterForm = (props) => {
       .then(() => {
         setRegFormErrors({
           ...regFormErrors,
-          [name]: "",
+          [name]: '',
         });
       })
       .catch((err) => {
@@ -59,7 +64,7 @@ const RegisterForm = (props) => {
       password: register.password.trim(),
     };
     await props.registerUser(creds);
-    push("/login");
+    push('/login');
   };
   useEffect(() => {
     schema.isValid(register).then((valid) => {
@@ -69,39 +74,39 @@ const RegisterForm = (props) => {
 
   return (
     <LoginStyle>
-    <LoginFormDiv>
-      <form onSubmit={submitHandler}>
-        <StyledInput
-          type="text"
-          name="username"
-          placeholder="Username"
-          onChange={handleChange}
-          value={register.username}
-        />
-        <ValidationErrs>{regFormErrors.username}</ValidationErrs>
+      <LoginFormDiv>
+        <form onSubmit={submitHandler}>
+          <StyledInput
+            type="text"
+            name="username"
+            placeholder="Username"
+            onChange={handleChange}
+            value={register.username}
+          />
+          <ValidationErrs>{regFormErrors.username}</ValidationErrs>
 
-        <StyledInput
-          type="text"
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-          value={register.email}
-        />
-        <ValidationErrs>{regFormErrors.email}</ValidationErrs>
+          <StyledInput
+            type="text"
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+            value={register.email}
+          />
+          <ValidationErrs>{regFormErrors.email}</ValidationErrs>
 
-        <StyledInput
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={handleChange}
-          value={register.password}
-        />
-        <ValidationErrs>{regFormErrors.password}</ValidationErrs>
-        <ButtonDiv>
-          <Btn disabled={disabled}>Register</Btn>
-        </ButtonDiv>
-      </form>
-    </LoginFormDiv>
+          <StyledInput
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+            value={register.password}
+          />
+          <ValidationErrs>{regFormErrors.password}</ValidationErrs>
+          <ButtonDiv>
+            <Btn disabled={disabled}>Register</Btn>
+          </ButtonDiv>
+        </form>
+      </LoginFormDiv>
     </LoginStyle>
   );
 };

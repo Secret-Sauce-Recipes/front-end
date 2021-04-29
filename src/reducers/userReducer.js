@@ -5,15 +5,15 @@ import {
   LOGIN_LOADING,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-} from "../actions/userAction";
+} from '../actions/userAction';
 
 const initialState = {
-  username: "",
-  password: "",
-  email: "",
-  error: "",
+  username: '',
+  password: '',
+  email: '',
+  error: '',
   isLoading: false,
-  user_id: "",
+  user_id: '',
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -35,19 +35,19 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: "",
+        error: action.payload,
       };
     case LOGIN_LOADING:
       return {
         ...state,
         isLoading: true,
-        error: "",
+        error: '',
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        error: "",
+        error: '',
       };
     case LOGIN_FAILURE:
       return {

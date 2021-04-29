@@ -53,6 +53,16 @@ const FormGroup = styled.div`
   align-items: center;
 `;
 
+const StyledH1 = styled.h1`
+  height: 2vh;
+  display: flex;
+  justify-content: center;
+  color: #3d405b;
+  font-family: sans-serif;
+  font-size: 4rem;
+  font-weight: bold;
+`;
+
 const StyledH2 = styled.h2`
   height: 2vh;
   display: flex;
@@ -184,7 +194,17 @@ const LoginFormDiv = styled.div`
   background-color: #fefae0;
   width: 20rem;
 `;
-
+const BgImgStyle = styled.div`
+box-sizing: border-box;
+background-image: url(' https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fGZvb2R8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
+background-size:contain;
+justify-content:center;
+align-content:center;
+display: flex;
+width:80%;
+height:60vh;
+background-repeat:no-repeat;
+`;
 
 export {
   LoginStyle,
@@ -194,6 +214,7 @@ export {
   StyledH3,
   StyledLabel,
   StyledTextArea,
+  StyledH1,
   StyledInput2,
   StyledInput,
   Btn,
@@ -206,5 +227,6 @@ export {
   StyledDd,
   LandingStyle,
   LoginBtn,
-  LoginFormDiv
+  LoginFormDiv,
+  BgImgStyle
 };

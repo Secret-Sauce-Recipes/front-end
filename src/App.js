@@ -23,7 +23,7 @@ function App() {
         <RegisterForm />
       </Route>
       <PrivateRoute path="/recipes/:recipeID" component={SingleRecipe} />
-      <PrivateRoute exact path="/recipes" component={LoggedInLanding} />
+      <Route exact path="/recipes" component={LoggedInLanding} />
       <PrivateRoute path="/recipes/add" component={AddRecipe} />
       <PrivateRoute path="/recipes/edit" component={EditRecipe} />
     </div>

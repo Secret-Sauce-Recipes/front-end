@@ -18,7 +18,7 @@ const initialState = {
   isLoading: false,
   allRecipes: [{
    
-    recipe_id: 0,
+    recipe_id: "",
     recipe_img: "",
     source: "",
     category: "",
@@ -29,7 +29,7 @@ const initialState = {
   }],
   singleRecipe: {
     
-    recipe_id: 0,
+    recipe_id: "",
     recipe_img: "",
     source: "",
     category: "",
@@ -72,7 +72,7 @@ export const recipeReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: "",
-        recipes: [...state.recipes, action.payload],
+        allRecipes: [...state.allRecipes, action.payload]
       };
     case ADD_RECIPE_FAILURE:
       return {
@@ -89,8 +89,9 @@ export const recipeReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: "",
-        recipes: [...state.recipes, action.payload],
+        allRecipes: state.allRecipes.filter(recipe => {
+          return recipe.recipe_id !== action.payload.recipe_id
+        }),
       };
     case DELETE_RECIPE_FAILURE:
       return {
@@ -109,7 +110,7 @@ export const recipeReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: "",
-        recipes: [...state.recipes, action.payload],
+        allRecipes: [...state.allRecipes, action.payload],
       };
     case EDIT_RECIPE_FAILURE:
       return {

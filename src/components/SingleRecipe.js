@@ -1,9 +1,17 @@
 import { useHistory, useParams } from "react-router";
+import { connect } from 'react-redux';
+import { deleteRecipe} from '../actions/recipeActions';
 
 const SingleRecipes = (props) => {
   const { recipe_id } = useParams();
   const { push } = useHistory();
   const { recipe } = props
+
+  const deleteHandler = () => {
+    props.deleteRecipe(recipe.recipe_id)
+  }
+
+  
 
   return ( 
   <div>
@@ -14,9 +22,10 @@ const SingleRecipes = (props) => {
     <p>instructions: {recipe.instructions}</p>
     <p>source: {recipe.source}</p>
     <button>Edit</button>
-    <button>Delete</button>
+    <button onClick={() => deleteHandler()}>Delete</button>
   </div>  
    )
 };
 
-export default SingleRecipes;
+
+export default connect(null, {deleteRecipe})(SingleRecipes);

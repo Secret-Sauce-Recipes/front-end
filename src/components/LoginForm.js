@@ -29,6 +29,7 @@ const LoginForm = (props) => {
   const [loginFormErrors, setLoginFormErrors] = useState(initialLoginErrors);
   const [disabled, setDisabled] = useState(initialLoginDisabled);
   const { push } = useHistory();
+  const { isLoggedIn } = props
 
   const onChange = (evt) => {
     const { name, value } = evt.target;
@@ -63,9 +64,15 @@ const LoginForm = (props) => {
       password: loginFormValues.password.trim(),
     };
     props.loginUser(loginCreds);
-    setLoginFormValues(initialLoginValues);
-    push('/recipes');
+    // setLoginFormValues(initialLoginValues);
+    // debugger
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      push('/recipes')
+    }
+  }, [push, isLoggedIn])
 
   useEffect(() => {
     schema.isValid(loginFormValues).then((valid) => {
@@ -102,8 +109,9 @@ const LoginForm = (props) => {
 };
 const mapStateToProps = (state) => {
   return {
-    username: state.username,
-    password: state.password,
+    username: state.userReducer.username,
+    password: state.userReducer.password,
+    isLoggedIn: state.userReducer.isLoggedIn
   };
 };
 

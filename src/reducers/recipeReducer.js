@@ -1,7 +1,7 @@
 import {
-  GET_RECIPE_LOADING,
-  GET_RECIPE_SUCCESS,
-  GET_RECIPE_FAILURE,
+  GET_RECIPES_LOADING,
+  GET_RECIPES_SUCCESS,
+  GET_RECIPES_FAILURE,
   ADD_RECIPE_LOADING,
   ADD_RECIPE_SUCCESS,
   ADD_RECIPE_FAILURE,
@@ -16,37 +16,46 @@ import {
 const initialState = {
   error: "",
   isLoading: false,
-  recipe_id: 0,
-  recipe_img: "",
-  source: "",
-  category: "",
-  ingredients: "",
-  instructions: "",
-  recipe_name: "",
+  allRecipes: [{
+   
+    recipe_id: 0,
+    recipe_img: "",
+    source: "",
+    category: "",
+    ingredients: "",
+    instructions: "",
+    recipe_name: ""
+
+  }],
+  singleRecipe: {
+    
+    recipe_id: 0,
+    recipe_img: "",
+    source: "",
+    category: "",
+    ingredients: "",
+    instructions: "",
+    recipe_name: ""
+
+  }
 };
 
 export const recipeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_RECIPE_LOADING:
+    case GET_RECIPES_LOADING:
       return {
         ...state,
         isLoading: true,
         error: "",
       };
-    case GET_RECIPE_SUCCESS:
+    case GET_RECIPES_SUCCESS:
       return {
         ...state,
         isLoading: false,
         error: "",
-        recipe_id: 0,
-        recipe_img: "",
-        source: "",
-        category: "",
-        ingredients: "",
-        instructions: "",
-        recipe_name: "",
+        allRecipes: action.payload
       };
-    case GET_RECIPE_FAILURE:
+    case GET_RECIPES_FAILURE:
       return {
         ...state,
         isLoading: false,

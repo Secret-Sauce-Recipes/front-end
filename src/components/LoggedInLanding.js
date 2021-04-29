@@ -1,29 +1,41 @@
 import { connect } from 'react-redux';
-import { getRecipe } from '../actions/recipeActions';
+import { getRecipes } from '../actions/recipeActions';
 import { useEffect } from 'react';
+import { useHistory } from 'react-router'
+import SingleRecipe from './SingleRecipe'
 
 const LoggedInLanding = (props) => {
-  const { getRecipe } = props;
+  const { getRecipes } = props;
+  const { push } = useHistory();
 
   useEffect(() => {
-    getRecipe();
-  }, [getRecipe]);
+    getRecipes();
+  }, [getRecipes]);
 
-  return <div>{props.getRecipe}</div>;
+  const addHandler = (e) => {
+    e.preventDefault();
+    push('/recipes/add')
+  }
+
+
+  return (
+  <div>
+    <button onClick={addHandler}>Add Recipe</button>
+    <div>
+    {props.allRecipes.map(recipe => {
+      return(
+        <SingleRecipe key={recipe.recipe_id} recipe={recipe}/>
+      )
+    })}
+    </div>
+  </div>
+  )
 };
 
 const mapStateToProps = (state) => {
   return {
-    recipe_id: state.recipeReducer.recipe_id,
-    recipe_img: state.recipeReducer.recipe_img,
-    source: state.recipeReducer.source,
-    category: state.recipeReducer.category,
-    ingredients: state.recipeReducer.ingredients,
-    instructions: state.recipeReducer.instructions,
-    recipe_name: state.recipeReducer.recipe_name,
+    allRecipes: state.recipeReducer.allRecipes
   };
 };
 
-//! mapStateToProps recipes,error,isLoading etc
-//!display oin this page
-export default connect(mapStateToProps, { getRecipe })(LoggedInLanding);
+export default connect(mapStateToProps, { getRecipes })(LoggedInLanding);

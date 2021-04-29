@@ -1,8 +1,12 @@
 import axiosWithAuth from "../utils/axiosWithAuth";
 
-export const GET_RECIPE_LOADING = "GET_RECIPE_LOADING";
-export const GET_RECIPE_SUCCESS = "GET_RECIPE_SUCCESS";
-export const GET_RECIPE_FAILURE = "GET_RECIPE_FAILURE";
+export const GET_RECIPES_LOADING = "GET_RECIPES_LOADING";
+export const GET_RECIPES_SUCCESS = "GET_RECIPES_SUCCESS";
+export const GET_RECIPES_FAILURE = "GET_RECIPES_FAILURE";
+
+export const GET_RECIPE_BY_ID_LOADING = "GET_RECIPE_BY_ID_LOADING";
+export const GET_RECIPE_BY_ID_SUCCESS = "GET_RECIPE_BY_ID_SUCCESS";
+export const GET_RECIPE_BY_ID_FAILURE = "GET_RECIPE_BY_ID_FAILURE";
 
 export const ADD_RECIPE_LOADING = "ADD_RECIPE_LOADING";
 export const ADD_RECIPE_SUCCESS = "ADD_RECIPE_SUCCESS";
@@ -16,20 +20,36 @@ export const EDIT_RECIPE_LOADING = "EDIT_RECIPE_LOADING";
 export const EDIT_RECIPE_SUCCESS = "EDIT_RECIPE_SUCCESS";
 export const EDIT_RECIPE_FAILURE = "EDIT_RECIPE_FAILURE";
 
-export const getRecipe = () => (dispatch) => {
-  dispatch({ type: GET_RECIPE_LOADING });
+export const getRecipes = () => (dispatch) => {
+  dispatch({ type: GET_RECIPES_LOADING });
   axiosWithAuth()
     .get("api/recipes")
-    .then((res) => dispatch({ type: GET_RECIPE_SUCCESS, payload: res.data }))
+    .then((res) => dispatch({ type: GET_RECIPES_SUCCESS, payload: res.data }))
     .catch((err) => {
       dispatch({
-        type: GET_RECIPE_FAILURE,
+        type: GET_RECIPES_FAILURE,
         payload: err.response.data.message,
       });
     });
 };
+
+export const getRecipeId = (recipeId) => (dispatch) => {
+  dispatch({ type: GET_RECIPE_BY_ID_LOADING });
+  axiosWithAuth()
+    .get(`api/recipes/${recipeId}`)
+    .then((res) => dispatch({ type: GET_RECIPE_BY_ID_SUCCESS, payload: res.data }))
+    .catch((err) => {
+      dispatch({
+        type: GET_RECIPE_BY_ID_FAILURE,
+        payload: err.response.data.message,
+      });
+    });
+};
+
+
 export const addRecipe = (newRecipe) => (dispatch) => {
   dispatch({ type: ADD_RECIPE_LOADING });
+  console.log(newRecipe)
   axiosWithAuth()
     .post("api/recipes", newRecipe)
     .then((res) => dispatch({ type: ADD_RECIPE_SUCCESS, payload: res.data }))

@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <NavBar />
       <Route exact path="/">
-        {/* <Landing /> */}
+        <Landing />
           <AddRecipe />
       </Route>
       <Route>

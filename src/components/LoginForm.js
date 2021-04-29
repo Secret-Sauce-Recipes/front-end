@@ -3,9 +3,7 @@ import schema from "../validation/login-schema";
 import * as yup from "yup";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/userAction";
-import { LoginStyle, StyledInput, Btn, ValidationErrs, ButtonDiv } from "../style/component-styles"
-
-
+import { LoginStyle, StyledInput, Btn, ValidationErrs, ButtonDiv, LoginFirstDiv, FormGroup } from "../style/component-styles";
 
 // Set initial login credentials empty
 const initialLoginValues = {
@@ -23,8 +21,6 @@ const initialLoginErrors = {
 const initialLoginDisabled = true;
 
 const LoginForm = () => {
-  // export default function Form(props) {
-  // const { values, submit, change, errors } = props;
 
   // state for login credentials and form errors
   const [loginFormValues, setLoginFormValues] = useState(initialLoginValues);
@@ -73,15 +69,6 @@ const LoginForm = () => {
     loginUser(loginCreds);
   };
 
-  // const loginSubmit = () => {
-  //   const loginCredentials = {
-  //     username: loginFormValues.username.trim(),
-  //     password: loginFormValues.password.trim(),
-  //   };
-  //   // authenticate login
-  //   loginAuthenticate(loginCredentials);
-  // };
-
   useEffect(() => {
     // ADJUST THE STATUS OF `disabled` EVERY TIME `loginFormValues` CHANGES
     schema.isValid(loginFormValues).then((valid) => {
@@ -91,9 +78,11 @@ const LoginForm = () => {
 
   return (
     <form className="form container" onSubmit={onSubmit}>
-      <div className="login-inputs">
+      {/* <div className="login-inputs"> */}
         {/* ////////// LOGIN TEXT INPUTS ////////// */}
-        <LoginStyle>
+        {/* <LoginStyle> */}
+          {/* <FormGroup> */}
+          <LoginFirstDiv>
           <StyledInput
             value={loginFormValues.username}
             onChange={onChange}
@@ -111,6 +100,7 @@ const LoginForm = () => {
             placeholder="Password"
           />
           <ValidationErrs>{loginFormErrors.password}</ValidationErrs>
+          </LoginFirstDiv>
 
 
           {/* DISABLE THE BUTTON */}
@@ -119,10 +109,9 @@ const LoginForm = () => {
               Log in
             </Btn>
           </ButtonDiv>
-
-        </LoginStyle>
-      </div>
-    </form>
+        {/* </FormGroup> */}
+        {/* </LoginStyle> */}
+   </form>
   );
 };
 const mapStateToProps = (state) => {

@@ -2,52 +2,10 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import schema from "../validation/login-schema";
 import * as yup from "yup";
-import { LoginStyle, StyledInput, Btn, ValidationErrs } from "../style/component-styles"
+import { LoginStyle, StyledInput, ButtonDiv, Btn, ValidationErrs } from "../style/component-styles"
 
 const StyledDiv = styled.div``;
-// STYLES COPIED FROM AddRecipe.js - SHOULD BE REFACTORED
-//Styles
-// Had to change flex-direction from PageStyle, so renamed it LoginStyles
-// const RegStyle = styled.div`
-//   box-sizing: border-box;
-//   background-color: #fefae0;
-//   width: 100%;
-//   border: 1px solid blue;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-// `;
-// const StyledInput = styled.input`
-//   width: 15rem;
-//   height: 2.5vh;
-//   margin: 0.5rem;
-//   padding: 2px;
-// `;
-// const Btn = styled.button`
-//   //  display: flex;
-//   //  justify-content: center;
-//   background-color: #e07a5f;
-//   width: 10%;
-//   height: 5vh;
-//   //  align-content:center;
-//   //  align-items: center;
-//   // font-size: 1rem;
-//   margin: 0.5rem;
-//   padding: 2px;
-// `;
 
-// const ValidationErrs = styled.div`
-//   color: red;
-//   font-family: sans-serif;
-//   font-size: 1rem;
-//   font-weight: bold;
-//   display: flex;
-//   flex-direction: column;
-//   width: 50%;
-//   margin: 0 auto;
-//   justify-content: center;
-//   // border: 1px solid red;
-// `;
 
 const initialValues = {
   username: "",
@@ -134,9 +92,11 @@ export default function RegisterForm() {
           onChange={handleChange}
           value={register.password}
         />
-        <ValidationErrs>{regFormErrors.password}</ValidationErrs>
 
-        <Btn disabled={disabled}>Register</Btn>
+        <ValidationErrs>{regFormErrors.password}</ValidationErrs>
+        <ButtonDiv>
+          <Btn disabled={disabled}>Register</Btn>
+        </ButtonDiv>
 
           {/* RENDER THE VALIDATION ERRORS HERE */}
           {/* <style.ValidationErrs className="errors">

@@ -4,26 +4,28 @@ import RegisterForm from "./components/RegisterForm";
 import { PrivateRoute } from "./utils/PrivateRoute";
 import LoginForm from "./components/LoginForm";
 import Landing from "./components/Landing";
-import NavBar from "./components/NavBar";
+import EditRecipe from "./components/EditRecipe";
+import SingleRecipe from "./components/SingleRecipe";
+
 import LoggedInLanding from "./components/LoggedInLanding";
 import AddRecipe from "./components/AddRecipe";
 
 function App() {
   return (
     <div className="App">
-      <NavBar />
       <Route exact path="/">
         <Landing />
-          <AddRecipe />
       </Route>
-      <Route>
+      <Route path="/login">
         <LoginForm />
       </Route>
-      <Route>
+      <Route path="/register">
         <RegisterForm />
       </Route>
-      <PrivateRoute exact path="/loggedInLanding" component={LoggedInLanding} />
-      <PrivateRoute path="/addRecipe" component={AddRecipe} />
+      <PrivateRoute path="/recipes/:recipeID" component={SingleRecipe} />
+      <PrivateRoute exact path="/recipes" component={LoggedInLanding} />
+      <PrivateRoute path="/recipes/add" component={AddRecipe} />
+      <PrivateRoute path="/recipes/edit" component={EditRecipe} />
     </div>
   );
 }

@@ -16,13 +16,13 @@ import {
 const initialState = {
   error: "",
   isLoading: false,
-  password: "",
   recipe_id: 0,
   recipe_img: "",
   source: "",
   category: "",
   ingredients: "",
   instructions: "",
+  recipe_name: "",
 };
 
 export const recipeReducer = (state = initialState, action) => {
@@ -38,6 +38,13 @@ export const recipeReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: "",
+        recipe_id: 0,
+        recipe_img: "",
+        source: "",
+        category: "",
+        ingredients: "",
+        instructions: "",
+        recipe_name: "",
       };
     case GET_RECIPE_FAILURE:
       return {
@@ -56,6 +63,7 @@ export const recipeReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: "",
+        recipes: [...state.recipes, action.payload],
       };
     case ADD_RECIPE_FAILURE:
       return {
@@ -73,6 +81,7 @@ export const recipeReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: "",
+        recipes: [...state.recipes, action.payload],
       };
     case DELETE_RECIPE_FAILURE:
       return {
@@ -91,6 +100,7 @@ export const recipeReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: "",
+        recipes: [...state.recipes, action.payload],
       };
     case EDIT_RECIPE_FAILURE:
       return {

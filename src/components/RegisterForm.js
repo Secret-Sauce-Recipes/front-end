@@ -3,6 +3,9 @@ import styled from "styled-components";
 import schema from "../validation/login-schema";
 import * as yup from "yup";
 import { LoginFormDiv, LoginStyle, StyledInput, ButtonDiv, Btn, ValidationErrs } from "../style/component-styles"
+import { registerUser } from "../actions/userAction";
+import { connect } from "react-redux";
+import { useHistory } from "react-router";
 
 const initialValues = {
   username: "",
@@ -10,52 +13,55 @@ const initialValues = {
   email: "",
 };
 
-// Set initial register form error msgs empty
 const initialRegErrors = {
   username: "",
   password: "",
   email: "",
-}
-// set login button initially disabled
+};
+
+
 const initialRegDisabled = true;
 
-export default function RegisterForm() {
+const RegisterForm = (props) => {
   const [register, setRegister] = useState(initialValues);
   const [regFormErrors, setRegFormErrors] = useState(initialRegErrors);
   const [disabled, setDisabled] = useState(initialRegDisabled);
-
+  const { push } = useHistory();
+  
   const handleChange = (e) => {
     setRegister({
       ...register,
       [e.target.name]: e.target.value,
     });
     const { name, value } = e.target;
-// yup validation
     yup
-    .reach(schema, name)
-    .validate(value)
-    .then(() => {
-      // happy path and clear the error
-      setRegFormErrors({
-        ...regFormErrors,
-        [name]: "",
+      .reach(schema, name)
+      .validate(value)
+      .then(() => {
+        setRegFormErrors({
+          ...regFormErrors,
+          [name]: "",
+        });
+      })
+      .catch((err) => {
+        setRegFormErrors({
+          ...regFormErrors,
+          [name]: err.errors[0],
+        });
       });
-    })
-    // add error message each time validation unsuccessful
-    .catch((err) => {
-      setRegFormErrors({
-        ...regFormErrors,
-        // validation error from schema
-        [name]: err.errors[0],
-      });
-    });
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    const creds = {
+      username: register.username.trim(),
+      email: register.email.trim(),
+      password: register.password.trim(),
+    };
+    await props.registerUser(creds);
+    push("/login");
   };
   useEffect(() => {
-    // ADJUST THE STATUS OF `disabled` EVERY TIME `regFormValues` CHANGES
     schema.isValid(register).then((valid) => {
       setDisabled(!valid);
     });
@@ -80,9 +86,9 @@ export default function RegisterForm() {
           placeholder="Email"
           onChange={handleChange}
           value={register.email}
-          />
-          <ValidationErrs>{regFormErrors.email}</ValidationErrs>
- 
+        />
+        <ValidationErrs>{regFormErrors.email}</ValidationErrs>
+
         <StyledInput
           type="password"
           name="password"
@@ -90,14 +96,14 @@ export default function RegisterForm() {
           onChange={handleChange}
           value={register.password}
         />
-
         <ValidationErrs>{regFormErrors.password}</ValidationErrs>
         <ButtonDiv>
           <Btn disabled={disabled}>Register</Btn>
         </ButtonDiv>
-
       </form>
     </LoginFormDiv>
     </LoginStyle>
   );
-}
+};
+
+export default connect(null, { registerUser })(RegisterForm);

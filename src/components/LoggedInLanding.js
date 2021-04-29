@@ -1,17 +1,52 @@
 import { connect } from 'react-redux';
-import { getRecipe } from '../actions/recipeActions';
-import { useEffect } from 'react';
+import { getRecipes } from '../actions/recipeActions';
+import { useState, useEffect } from 'react';
 import { StyledH1, StyledH3, BgImgStyle } from '../style/component-styles';
+import { useHistory } from 'react-router'
+import SingleRecipe from './SingleRecipe'
+
+
+const initialFormValues = {
+  recipe_name: '',
+  source: '',
+  categories: '',
+};
 
 const LoggedInLanding = (props) => {
-  const { getRecipe } = props;
+  const { getRecipes } = props;
+  const { push } = useHistory();
+
+  const [formValues, setFormValues] = useState(initialFormValues);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    getRecipe();
-  }, [getRecipe]);
+    getRecipes();
+  }, [getRecipes]);
 
 
+  const addHandler = (e) => {
+    e.preventDefault();
+    push('/recipes/add')
+  }
 
+  const onSubmit = (evt) => {
+    evt.preventDefault();
+    const newSearch = {
+      recipe_name: formValues.recipe_name.trim(),
+      source: formValues.source.trim(),
+      categories: formValues.categories,
+    };
+
+    // setFormValues({ ...recipe, newRecipe });
+    // props.LoggedInLanding(newSearch);
+    //TODO a axios POST request to get the searched data based on filters
+    setFormValues(initialFormValues);
+    // push(`/recipes`)
+    console.log('test')
+
+  const onChange = (evt) => {
+    const { name, value } = evt.target;
+    setSearch( { ...initialFormValues, [name]: value });
  
 
   return (
@@ -51,30 +86,47 @@ const LoggedInLanding = (props) => {
              name="recipe_name"
              type="text"
             />
+
+            <button id="searchBtn" submit={onSubmit}> Search </button>
            </div>
     </BgImgStyle>
     </form>
 
-  <div>{props.getRecipe}</div>
+  {/* <div>{props.getRecipe}</div> */}
+
+  <div>
+    <button onClick={addHandler}>Add Recipe</button>
+    <div>
+    {props.allRecipes.map(recipe => {
+      return(
+        <SingleRecipe key={recipe.recipe_id} recipe={recipe}/>
+      )
+    })}
+    </div>
+  </div>
   </>
   );
+  
+
+  // return (
+  // <div>
+  //   <button onClick={addHandler}>Add Recipe</button>
+  //   <div>
+  //   {props.allRecipes.map(recipe => {
+  //     return(
+  //       <SingleRecipe key={recipe.recipe_id} recipe={recipe}/>
+  //     )
+  //   })}
+  //   </div>
+  // </div>
+  // )
 };
 
 const mapStateToProps = (state) => {
   return {
-   
-    recipe_id: state.recipeReducer.recipe_id,
-    recipe_img: state.recipeReducer.recipe_img,
-    source: state.recipeReducer.source,
-    category: state.recipeReducer.category,
-    ingredients: state.recipeReducer.ingredients,
-    instructions: state.recipeReducer.instructions,
-    recipe_name: state.recipeReducer.recipe_name,
-
+    allRecipes: state.recipeReducer.allRecipes
   };
   
 };
 
-//! mapStateToProps recipes,error,isLoading etc
-//!display oin this page
-export default connect(mapStateToProps, { getRecipe })(LoggedInLanding);
+export default connect(mapStateToProps, { getRecipes })(LoggedInLanding);

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import schema from '../validation/Add-Schema';
+import { connect } from 'react-redux';
+import { addRecipe} from '../actions/recipeActions'
+import { useHistory } from 'react-router'
 import {
   PageStyle,
   FormGroup,
@@ -44,11 +47,13 @@ const initialFormErrors = {
 
 const initialDisabled = true;
 
-export default function AddRecipe() {
+const AddRecipe = (props) => {
   const [recipe, setRecipe] = useState(recipeObj);
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
+
+  const { push } = useHistory();
 
   const onSubmit = (evt) => {
     evt.preventDefault();
@@ -60,8 +65,12 @@ export default function AddRecipe() {
       instructions: formValues.instructions.trim(),
       categories: formValues.categories,
     };
-    setFormValues({ ...recipe, newRecipe });
+    // setFormValues({ ...recipe, newRecipe });
+    props.addRecipe(newRecipe);
     setFormValues(initialFormValues);
+    // push(`/recipes`)
+    console.log('test')
+    
   };
   const changeSubmitColor = (valid) => {
     if (!valid) {
@@ -104,7 +113,7 @@ export default function AddRecipe() {
 
   return (
     <PageStyle>
-      <FormGroup onSubmit={onSubmit}>
+      <FormGroup>
         <div className="form-input">
           <StyledH2>Add New Recipe</StyledH2>
         </div>
@@ -122,16 +131,11 @@ export default function AddRecipe() {
           <label>
             Recipe Image :&nbsp;
             <StyledInput
-              type="file"
-              id="avatar"
-              name="avatar"
-              accept="image/png, image/jpeg"></StyledInput>
-            {/* <StyledInput
                     value={recipe.recipe_img}
                     onChange={onChange}
                     name="recipe_img"
                     type="text"
-                /> */}
+                />
           </label>
 
           <label>
@@ -144,7 +148,7 @@ export default function AddRecipe() {
             />
           </label>
 
-          <StyledLabel for="Category">
+          <StyledLabel htmlFor="Category">
             Category:
             <StyledDd
               name="categories"
@@ -190,7 +194,7 @@ export default function AddRecipe() {
           </label>
         </StyledThirdDiv>
         <ButtonDiv>
-          <Btn disabled={disabled} id="addBtn">
+          <Btn disabled={disabled} onClick={onSubmit}id="addBtn">
             Add Recipe
           </Btn>
         </ButtonDiv>
@@ -198,3 +202,11 @@ export default function AddRecipe() {
     </PageStyle>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    recipes: state.recipeReducer.recipes
+  }
+}
+
+export default connect(mapStateToProps, {addRecipe})(AddRecipe);

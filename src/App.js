@@ -5,8 +5,6 @@ import { PrivateRoute } from "./utils/PrivateRoute";
 import LoginForm from "./components/LoginForm";
 import Landing from "./components/Landing";
 import EditRecipe from "./components/EditRecipe";
-import SingleRecipe from "./components/SingleRecipe";
-
 import LoggedInLanding from "./components/LoggedInLanding";
 import AddRecipe from "./components/AddRecipe";
 
@@ -22,10 +20,9 @@ function App() {
       <Route path="/register">
         <RegisterForm />
       </Route>
-      <PrivateRoute path="/recipes/:recipeID" component={SingleRecipe} />
       <Route exact path="/recipes" component={LoggedInLanding} />
       <PrivateRoute path="/recipes/add" component={AddRecipe} />
-      <PrivateRoute path="/recipes/edit" component={EditRecipe} />
+      <PrivateRoute path="/recipes/edit/:recipeID" component={EditRecipe} />
     </div>
   );
 }

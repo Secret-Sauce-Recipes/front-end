@@ -3,7 +3,7 @@ import schema from "../validation/login-schema";
 import * as yup from "yup";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/userAction";
-import { StyledInput, LoginBtn, ValidationErrs, ButtonDiv, LoginFirstDiv, FormGroup, LoginFormDiv } from "../style/component-styles";
+import { StyledInput, LoginBtn, ValidationErrs, ButtonDiv, LoginFirstDiv, FormGroup, LoginFormDiv, LoginStyle } from "../style/component-styles";
 
 // Set initial login credentials empty
 const initialLoginValues = {
@@ -78,13 +78,9 @@ const LoginForm = () => {
 
   return (
     <form className="form container" onSubmit={onSubmit}>
-      {/* <LoginFormDiv /> */}
-      <div className="login-inputs">
-        {/* ////////// LOGIN TEXT INPUTS ////////// */}
-        {/* <LoginStyle> */}
-          {/* <FormGroup> */}
-          {/* <LoginFirstDiv> */}
-          <StyledInput
+      <LoginStyle>
+      <LoginFormDiv >
+         <StyledInput
           // <input
             value={loginFormValues.username}
             onChange={onChange}
@@ -93,7 +89,6 @@ const LoginForm = () => {
             placeholder="Username"
           />
           <ValidationErrs>{loginFormErrors.username}</ValidationErrs>
-          {/* <div>{loginFormErrors.username}</div> */}
 
           <StyledInput
           //  <input
@@ -104,13 +99,12 @@ const LoginForm = () => {
             placeholder="Password"
           />
           <ValidationErrs>{loginFormErrors.password}</ValidationErrs>
-          {/* <div>{loginFormErrors.password}</div> */}
 
 
           {/* DISABLE THE BUTTON */}
           <LoginBtn disabled={disabled}>Log in</LoginBtn>
-          </div>
-          {/* </LoginFormDiv> */}
+        </LoginFormDiv>
+        </LoginStyle>
    </form>
  
   );

@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import schema from "../validation/login-schema";
 import * as yup from "yup";
-import { LoginStyle, StyledInput, ButtonDiv, Btn, ValidationErrs } from "../style/component-styles"
-
-const StyledDiv = styled.div``;
-
+import { LoginFormDiv, LoginStyle, StyledInput, ButtonDiv, Btn, ValidationErrs } from "../style/component-styles"
 
 const initialValues = {
   username: "",
@@ -66,6 +63,7 @@ export default function RegisterForm() {
 
   return (
     <LoginStyle>
+    <LoginFormDiv>
       <form onSubmit={submitHandler}>
         <StyledInput
           type="text"
@@ -98,14 +96,8 @@ export default function RegisterForm() {
           <Btn disabled={disabled}>Register</Btn>
         </ButtonDiv>
 
-          {/* RENDER THE VALIDATION ERRORS HERE */}
-          {/* <style.ValidationErrs className="errors">
-            <div>{regFormErrors.username}</div>
-            <div>{regFormErrors.email}</div>
-            <div>{regFormErrors.password}</div>
-          </style.ValidationErrs> */}
-
       </form>
+    </LoginFormDiv>
     </LoginStyle>
   );
 }

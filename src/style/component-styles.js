@@ -61,7 +61,6 @@ const LoginStyle = styled.div`
   box-sizing: border-box;
   background-color: #fefae0;
   width: 100%;
-  border: 1px solid blue;
   display: flex;
   align-items: center;
   align-content: center;
@@ -69,9 +68,16 @@ const LoginStyle = styled.div`
   justify-content: center;
 `;
 const LoginFormDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  align-items: center;
+  align-content: center;
+  border: 3px inset #81B29A;
+  border-radius:10px;
   box-sizing: border-box;
   background-color: #fefae0;
-  width: 15rem;
+  width: 20rem;
 `;
 
 const StyledInput = styled.input`

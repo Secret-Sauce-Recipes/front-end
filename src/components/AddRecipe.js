@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import * as yup from "yup";
 import  schema from '../validation/Add-Schema'
 import ReactDOM from "react-dom";
-import {LoginStyle,PageStyle,FormGroup,StyledH2,
+import {LoginStyle,PageStyle, FormGroup,StyledH2,
     StyledH3,StyledLabel,StyledTextArea,StyledInput2, StyledInput, 
     Btn,StyledBtn,StyledFirstDiv, 
     StyledSecondDiv,StyledThirdDiv,ValidationErrs, 

@@ -52,10 +52,6 @@ const StyledH3 = styled.h3`
     font-size: 2rem;
     font-weight: bold;
 `
-
-
-
-
 const StyledInput = styled.input`
     width: 15rem;
     height: 2vh;
@@ -161,5 +157,5 @@ const ValidationErrs = styled.div`
   justify-content: left;
 `;
 
-export { LoginStyle,PageStyle,FormGroup,StyledH2,StyledH3,StyledLabel,StyledTextArea,StyledInput2, StyledInput, Btn,StyledBtn,StyledFirstDiv, StyledSecondDiv,StyledThirdDiv,ValidationErrs, ButtonDiv,StyledDd };
+export { LoginStyle,PageStyle, FormGroup, StyledH2,StyledH3,StyledLabel,StyledTextArea,StyledInput2, StyledInput, Btn,StyledBtn,StyledFirstDiv, StyledSecondDiv,StyledThirdDiv,ValidationErrs, ButtonDiv,StyledDd };
 

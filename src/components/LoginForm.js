@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from "react";
-import schema from "../validation/login-schema";
-import * as yup from "yup";
-import { connect } from "react-redux";
-import { loginUser } from "../actions/userAction";
-import { StyledInput, LoginBtn, ValidationErrs, ButtonDiv, LoginFirstDiv, FormGroup, LoginFormDiv, LoginStyle } from "../style/component-styles";
-import { useHistory } from "react-router";
-
+import React, { useState, useEffect } from 'react';
+import schema from '../validation/login-schema';
+import * as yup from 'yup';
+import { connect } from 'react-redux';
+import { loginUser } from '../actions/userAction';
+import {
+  StyledInput,
+  LoginBtn,
+  ValidationErrs,
+  LoginFormDiv,
+  LoginStyle,
+} from '../style/component-styles';
+import { useHistory } from 'react-router';
 
 const initialLoginValues = {
-  username: "",
-  password: "",
+  username: '',
+  password: '',
 };
 
 const initialLoginErrors = {
-  username: "",
-  password: "",
+  username: '',
+  password: '',
 };
-
 
 const initialLoginDisabled = true;
 
@@ -25,7 +29,7 @@ const LoginForm = (props) => {
   const [loginFormErrors, setLoginFormErrors] = useState(initialLoginErrors);
   const [disabled, setDisabled] = useState(initialLoginDisabled);
   const { push } = useHistory();
-  
+
   const onChange = (evt) => {
     const { name, value } = evt.target;
     inputChange(name, value);
@@ -38,7 +42,7 @@ const LoginForm = (props) => {
       .then(() => {
         setLoginFormErrors({
           ...loginFormErrors,
-          [name]: "",
+          [name]: '',
         });
       })
       .catch((err) => {
@@ -54,13 +58,13 @@ const LoginForm = (props) => {
   };
   const onSubmit = (evt) => {
     evt.preventDefault();
-
     const loginCreds = {
       username: loginFormValues.username.trim(),
       password: loginFormValues.password.trim(),
     };
     props.loginUser(loginCreds);
-    push("/recipes");
+    setLoginFormValues(initialLoginValues);
+    push('/recipes');
   };
 
   useEffect(() => {
@@ -72,8 +76,8 @@ const LoginForm = (props) => {
   return (
     <form className="form container" onSubmit={onSubmit}>
       <LoginStyle>
-      <LoginFormDiv >
-         <StyledInput
+        <LoginFormDiv>
+          <StyledInput
             value={loginFormValues.username}
             onChange={onChange}
             name="username"
@@ -92,9 +96,8 @@ const LoginForm = (props) => {
           <ValidationErrs>{loginFormErrors.password}</ValidationErrs>
           <LoginBtn disabled={disabled}>Log in</LoginBtn>
         </LoginFormDiv>
-        </LoginStyle>
-   </form>
- 
+      </LoginStyle>
+    </form>
   );
 };
 const mapStateToProps = (state) => {

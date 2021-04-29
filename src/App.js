@@ -20,7 +20,7 @@ function App() {
       <Route path="/register">
         <RegisterForm />
       </Route>
-      <Route exact path="/recipes" component={LoggedInLanding} />
+      <PrivateRoute exact path="/recipes" component={LoggedInLanding} />
       <PrivateRoute path="/recipes/add" component={AddRecipe} />
       <PrivateRoute path="/recipes/edit/:recipeID" component={EditRecipe} />
     </div>

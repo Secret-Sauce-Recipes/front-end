@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import styled from 'styled-components';
 import * as yup from "yup";
 import  schema from '../validation/Add-Schema'
- import ReactDOM from "react-dom";
+import ReactDOM from "react-dom";
 import {LoginStyle,PageStyle,FormGroup,StyledH2,
     StyledH3,StyledLabel,StyledTextArea,StyledInput2, StyledInput, 
     Btn,StyledBtn,StyledFirstDiv, 

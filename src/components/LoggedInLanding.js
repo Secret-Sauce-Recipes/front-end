@@ -1,9 +1,9 @@
-import { connect } from 'react-redux';
-import { getRecipes } from '../actions/recipeActions';
 import { useState, useEffect } from 'react';
 import { StyledH1, StyledH3, BgImgStyle } from '../style/component-styles';
 import { useHistory } from 'react-router'
 import SingleRecipe from './SingleRecipe'
+import { connect } from 'react-redux';
+import { getRecipes } from '../actions/recipeActions';
 
 
 const initialFormValues = {
@@ -36,23 +36,23 @@ const LoggedInLanding = (props) => {
       source: formValues.source.trim(),
       categories: formValues.categories,
     };
-
-    // setFormValues({ ...recipe, newRecipe });
-    // props.LoggedInLanding(newSearch);
-    //TODO a axios POST request to get the searched data based on filters
-    setFormValues(initialFormValues);
-    // push(`/recipes`)
-    console.log('test')
+  }
+  
+  // setFormValues({ ...recipe, newRecipe });
+  // props.LoggedInLanding(newSearch);
+  //TODO a axios POST request to get the searched data based on filters
+  // setFormValues(initialFormValues);
+  // push(`/recipes`)
+  // console.log('test')
 
   const onChange = (evt) => {
     const { name, value } = evt.target;
     setSearch( { ...initialFormValues, [name]: value });
- 
+  }
 
   return (
-   <>
+    <div>
     <form className="landingForm">
-
           <div>
           <StyledH1>Secret Sauce Recipes</StyledH1>
           </div>
@@ -91,36 +91,20 @@ const LoggedInLanding = (props) => {
            </div>
     </BgImgStyle>
     </form>
-
   {/* <div>{props.getRecipe}</div> */}
-
   <div>
     <button onClick={addHandler}>Add Recipe</button>
     <div>
-    {props.allRecipes.map(recipe => {
-      return(
-        <SingleRecipe key={recipe.recipe_id} recipe={recipe}/>
-      )
-    })}
+      {props.allRecipes.map(recipe => {
+        return(
+          <SingleRecipe key={recipe.recipe_id} recipe={recipe}/>
+        )
+      })}
     </div>
   </div>
-  </>
+ </div>
   );
-  
-
-  // return (
-  // <div>
-  //   <button onClick={addHandler}>Add Recipe</button>
-  //   <div>
-  //   {props.allRecipes.map(recipe => {
-  //     return(
-  //       <SingleRecipe key={recipe.recipe_id} recipe={recipe}/>
-  //     )
-  //   })}
-  //   </div>
-  // </div>
-  // )
-};
+}
 
 const mapStateToProps = (state) => {
   return {

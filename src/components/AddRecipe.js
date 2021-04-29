@@ -27,7 +27,7 @@ const FormGroup = styled.div`
     align-items:center;
     `
 
-    const StyledH2 = styled.h2`
+const StyledH2 = styled.h2`
     height: 2vh;
     display:flex;
     justify-content: center;

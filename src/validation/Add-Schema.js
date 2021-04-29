@@ -8,7 +8,7 @@ export default yup.object().shape({
     .min(6, 'Recipe name must be at least 6 characters long'),
   source: yup.string(),
   recipe_img: yup.string(),
-  categories: yup
+  category: yup
     .string()
     .oneOf(
       ['breakfast', 'brunch', 'lunch', 'snack', 'dinner'],

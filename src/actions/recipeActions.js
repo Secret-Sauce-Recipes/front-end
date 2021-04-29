@@ -56,7 +56,7 @@ export const addRecipe = (newRecipe) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: ADD_RECIPE_FAILURE,
-        payload: err.response.data.message,
+        payload: err.response,
       });
     });
 };
@@ -68,7 +68,7 @@ export const deleteRecipe = (recipe_id) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: DELETE_RECIPE_FAILURE,
-        payload: err.response.data.message,
+        payload: err.response,
       });
     });
 };

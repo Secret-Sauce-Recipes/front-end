@@ -28,7 +28,7 @@ const recipeObj = {
   ingredients: '',
   source: '',
   instructions: '',
-  categories: '',
+  category: '',
 };
 const initialFormValues = {
   recipe_name: '',
@@ -36,13 +36,13 @@ const initialFormValues = {
   ingredients: '',
   source: '',
   instructions: '',
-  categories: '',
+  category: '',
 };
 const initialFormErrors = {
   recipe_name: '',
   ingredients: '',
   instructions: '',
-  categories: '',
+  category: '',
 };
 
 const initialDisabled = true;
@@ -63,12 +63,12 @@ const AddRecipe = (props) => {
       ingredients: formValues.ingredients.trim(),
       source: formValues.source.trim(),
       instructions: formValues.instructions.trim(),
-      categories: formValues.categories,
+      category: formValues.category,
     };
     // setFormValues({ ...recipe, newRecipe });
     props.addRecipe(newRecipe);
     setFormValues(initialFormValues);
-    // push(`/recipes`)
+    push(`/recipes`)
     console.log('test')
     
   };
@@ -151,10 +151,10 @@ const AddRecipe = (props) => {
           <StyledLabel htmlFor="Category">
             Category:
             <StyledDd
-              name="categories"
+              name="category"
               id="categories"
               onChange={onChange}
-              value={recipe.categories}>
+              value={recipe.category}>
               <option value="choice">Choose a Category</option>
               <option value="breakfast">Breakfast</option>
               <option value="brunch">Brunch</option>
@@ -205,7 +205,7 @@ const AddRecipe = (props) => {
 
 const mapStateToProps = state => {
   return {
-    recipes: state.recipeReducer.recipes
+    allRecipes: state.recipeReducer.allRecipes
   }
 }
 

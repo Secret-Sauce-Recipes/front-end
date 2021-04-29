@@ -4,8 +4,11 @@ import * as yup from "yup";
 export default yup.object().shape({
     recipe_name: yup
       .string()
-      .required("Recipe name is required"),
+      .required("Recipe name is required")
+      .min(6,"Recipe name must be at least 6 characters long"),
     source: yup
+    .string(),
+    recipe_img: yup
     .string(),
       categories:yup
       .string()

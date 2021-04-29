@@ -3,9 +3,14 @@ import schema from "../validation/login-schema";
 import * as yup from "yup";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/userAction";
-import { LoginStyle, StyledInput, Btn, ValidationErrs, ButtonDiv } from "../style/component-styles"
-
-
+import {
+  LoginStyle,
+  StyledInput,
+  Btn,
+  ValidationErrs,
+  ButtonDiv,
+} from "../style/component-styles";
+import { useHistory } from "react-router";
 
 // Set initial login credentials empty
 const initialLoginValues = {
@@ -22,7 +27,7 @@ const initialLoginErrors = {
 // set login button initially disabled
 const initialLoginDisabled = true;
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   // export default function Form(props) {
   // const { values, submit, change, errors } = props;
 
@@ -30,7 +35,7 @@ const LoginForm = () => {
   const [loginFormValues, setLoginFormValues] = useState(initialLoginValues);
   const [loginFormErrors, setLoginFormErrors] = useState(initialLoginErrors);
   const [disabled, setDisabled] = useState(initialLoginDisabled);
-
+  const { push } = useHistory();
   const onChange = (evt) => {
     const { name, value } = evt.target;
     inputChange(name, value);
@@ -70,7 +75,8 @@ const LoginForm = () => {
       username: loginFormValues.username.trim(),
       password: loginFormValues.password.trim(),
     };
-    loginUser(loginCreds);
+    props.loginUser(loginCreds);
+    push("/recipes");
   };
 
   // const loginSubmit = () => {
@@ -112,14 +118,10 @@ const LoginForm = () => {
           />
           <ValidationErrs>{loginFormErrors.password}</ValidationErrs>
 
-
           {/* DISABLE THE BUTTON */}
           <ButtonDiv>
-            <Btn disabled={disabled}>
-              Log in
-            </Btn>
+            <Btn disabled={disabled}>Log in</Btn>
           </ButtonDiv>
-
         </LoginStyle>
       </div>
     </form>

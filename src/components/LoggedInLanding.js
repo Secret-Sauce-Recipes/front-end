@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from "react";
 import {
   StyledH1,
   Btn,
@@ -9,24 +9,24 @@ import {
   StyledDiv2,
   StyledInput,
   BgImgStyle,
-} from '../style/component-styles';
-import { useHistory } from 'react-router';
-import SingleRecipe from './SingleRecipe';
-import { connect } from 'react-redux';
-import { getRecipes } from '../actions/recipeActions';
+} from "../style/component-styles";
+import { useHistory } from "react-router";
+import SingleRecipe from "./SingleRecipe";
+import { connect } from "react-redux";
+import { getRecipes } from "../actions/recipeActions";
 
-const initialFormValues = {
-  recipe_name: '',
-  source: '',
-  categories: '',
-};
+// const initialFormValues = {
+//   recipe_name: "",
+//   source: "",
+//   categories: "",
+// };
 
 const LoggedInLanding = (props) => {
   const { getRecipes } = props;
   const { push } = useHistory();
 
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [search, setSearch] = useState('');
+  // const [formValues, setFormValues] = useState(initialFormValues);
+  // const [search, setSearch] = useState('');
 
   useEffect(() => {
     getRecipes();
@@ -34,7 +34,7 @@ const LoggedInLanding = (props) => {
 
   const addHandler = (e) => {
     e.preventDefault();
-    push('/recipes/add');
+    push("/recipes/add");
   };
 
   const onSubmit = (evt) => {
@@ -55,7 +55,11 @@ const LoggedInLanding = (props) => {
         </StyledDiv2>
         <BgImgStyle>
           <StyledDiv>
-            <StyledInput placeholder="Search by source name" name="source" type="text" />
+            <StyledInput
+              placeholder="Search by source name"
+              name="source"
+              type="text"
+            />
             <StyledInput
               placeholder="Search by recipe name"
               name="recipe_name"
@@ -71,8 +75,8 @@ const LoggedInLanding = (props) => {
             </StyledDd2>
             <ButtonDiv>
               <Btn id="searchBtn" submit={onSubmit}>
-                {' '}
-                Search Recipe{' '}
+                {" "}
+                Search Recipe{" "}
               </Btn>
             </ButtonDiv>
           </StyledDiv>

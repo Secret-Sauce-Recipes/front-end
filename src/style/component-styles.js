@@ -47,7 +47,8 @@ const PageStyle = styled.div`
   font-family: sans-serif;
 `;
 const RecipeImage = styled.img`
-  max-width: 50%;
+  min-width: 45%;
+  max-width: 45%;
   height: auto;
 `
 const RecipeCard = styled.div`
@@ -56,22 +57,35 @@ const RecipeCard = styled.div`
   align-items: space-between;
   justify-content: center;
   box-sizing: border-box;
-  background-color: #fefae0;
+  background-color: white;
+  // background-color: #fefae0;
   margin-left: auto;
   margin-right: auto;
-  margin-botton:10%
+  margin-botton: 10rem;
   padding: 3%;
-  width: 70%;
+  width: 80%;
   border: solid black 1px;
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
   font-family: sans-serif;
 `;
 
 const RecipeTextDiv = styled.div`
 width: 50%;
 margin-left:2%;
+`
+
+const RecipeH2 = styled.h2`
+  margin-bottom: 0;
+  margin-top: 5px;
+`
+
+const RecipeH3 = styled.h3`
+  margin-bottom: 0;
+  margin-top: 5px;
+`
+
+const RecipeH4 = styled.h4`
+  margin-bottom: 0;
+  margin-top: 5px
 `
 const FormGroup = styled.div`
   color: black;
@@ -85,6 +99,16 @@ const FormGroup = styled.div`
   justify-content: center;
   border: 1px solid #3d405b;
   align-items: center;
+`;
+
+const StyledH1 = styled.h1`
+  height: 2vh;
+  display: flex;
+  justify-content: center;
+  color: #3d405b;
+  font-family: sans-serif;
+  font-size: 4rem;
+  font-weight: bold;
 `;
 
 const StyledH2 = styled.h2`
@@ -119,8 +143,13 @@ const StyledTextArea = styled.textarea`
   border: none;
   padding: 0;
 `;
-const TextSpan = styled.span`
-margin-left: 1rem;
+const TextSpan = styled.div`
+  margin-left: 1rem;
+  margin-top: 2px;
+  margin-bottom: 5px;
+
+margin
+
 `
 
 const StyledInput2 = styled.input`
@@ -221,7 +250,17 @@ const LoginFormDiv = styled.div`
   background-color: #fefae0;
   width: 20rem;
 `;
-
+const BgImgStyle = styled.div`
+box-sizing: border-box;
+background-image: url(' https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fGZvb2R8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
+background-size:contain;
+justify-content:center;
+align-content:center;
+display: flex;
+width:80%;
+height:60vh;
+background-repeat:no-repeat;
+`;
 
 export {
   LoginStyle,
@@ -231,6 +270,7 @@ export {
   StyledH3,
   StyledLabel,
   StyledTextArea,
+  StyledH1,
   StyledInput2,
   StyledInput,
   Btn,
@@ -247,5 +287,9 @@ export {
   TextSpan,
   RecipeCard,
   RecipeImage,
-  RecipeTextDiv
+  RecipeTextDiv,
+  BgImgStyle,
+  RecipeH2,
+  RecipeH3,
+  RecipeH4
 };

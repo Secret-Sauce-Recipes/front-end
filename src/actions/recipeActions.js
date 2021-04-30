@@ -34,14 +34,16 @@ export const getRecipes = () => (dispatch) => {
 };
 
 export const getRecipeId = (recipeId) => (dispatch) => {
+  console.log('test');
   dispatch({ type: GET_RECIPE_BY_ID_LOADING });
   axiosWithAuth()
     .get(`api/recipes/${recipeId}`)
-    .then((res) => dispatch({ type: GET_RECIPE_BY_ID_SUCCESS, payload: res.data }))
+    .then((res) => { console.log(res) 
+      dispatch({ type: GET_RECIPE_BY_ID_SUCCESS, payload: res.data })})
     .catch((err) => {
       dispatch({
         type: GET_RECIPE_BY_ID_FAILURE,
-        payload: err.response.data.message,
+        payload: err.response,
       });
     });
 };
@@ -73,6 +75,7 @@ export const deleteRecipe = (recipe_id) => (dispatch) => {
     });
 };
 export const editRecipe = (recipe_id, editedRecipe) => (dispatch) => {
+  console.log(recipe_id);
   dispatch({ type: EDIT_RECIPE_LOADING });
   axiosWithAuth()
     .put(`api/recipes/${recipe_id}`, editedRecipe)
@@ -80,7 +83,7 @@ export const editRecipe = (recipe_id, editedRecipe) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: EDIT_RECIPE_FAILURE,
-        payload: err.response.data.message,
+        payload: err.response,
       });
     });
 };

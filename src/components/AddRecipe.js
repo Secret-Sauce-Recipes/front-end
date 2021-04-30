@@ -10,9 +10,11 @@ import {
   StyledH2,
   StyledH3,
   StyledLabel,
+  StyledLabel2,
   StyledTextArea,
   StyledInput,
   Btn,
+  StyledImageUpload,
   StyledFirstDiv,
   StyledSecondDiv,
   StyledThirdDiv,
@@ -128,17 +130,24 @@ const AddRecipe = (props) => {
             />
             <ValidationErrs>{formErrors.recipe_name}</ValidationErrs>
           </label>
-          <label>
+          {/* <label>
             Recipe Image :&nbsp;
             <StyledInput
                     value={recipe.recipe_img}
                     onChange={onChange}
                     name="recipe_img"
                     type="text"
-                />
-          </label>
-
-          <label>
+                />      
+          </label> */}
+          <StyledLabel2 for="recipe_img">Choose a profile picture:</StyledLabel2>
+              <StyledImageUpload 
+                    onChange={onChange}
+                    value={recipe.recipe_img}
+                    type="file"
+                    name="recipe_img"
+                    accept="image/png, image/jpeg">
+              </StyledImageUpload>             
+           <label>
             Source Name :&nbsp;
             <StyledInput
               value={recipe.source}

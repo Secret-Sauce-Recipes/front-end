@@ -170,6 +170,17 @@ const StyledInput = styled.input`
   border-radius:20px;
   text-align:center;
 `;
+const StyledImageUpload = styled.input`
+  display:flex;
+  align-content:center;
+  width: 15rem;
+  height: 2vh;
+  margin: 0.5rem;
+  padding:2px;
+  text-align:center;
+  background-color:#fcfdf5;
+`;
+
 const TextSpan = styled.div`
   margin-left: 1rem;
   margin-top: 2px;
@@ -242,6 +253,10 @@ const StyledBtn2 = styled.button`
 
 const StyledLabel = styled.label`
   margin-right: 12rem;
+`;
+
+const StyledLabel2 = styled.label`
+  margin-right: 6rem;
 `;
 
 //dropdown
@@ -357,11 +372,13 @@ export {
   StyledH3,
   StyledH4,
   StyledLabel,
+  StyledLabel2,
   StyledTextArea,
   StyledH1,
   StyledInput2,
   StyledInput,
   Btn,
+  StyledImageUpload,
   StyledBtn,
   StyledBtn2,
   StyledDiv,

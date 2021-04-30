@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+    // within the tick marks in a style definition, responsive changes would go here:
+    // @media (max-width: 800px) {
+    //   flex-direction: column;
+    // }
+
+
 const LoginStyle = styled.div`
   box-sizing: border-box;
   background-color: #fefae0;
@@ -37,8 +43,36 @@ const PageStyle = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  font-family: sans-serif;
 `;
+const RecipeImage = styled.img`
+  max-width: 50%;
+  height: auto;
+`
+const RecipeCard = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: #fefae0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-botton:3%
+  padding: 3%;
+  width: 70%;
+  border: solid black 1px;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  font-family: sans-serif;
+`;
+
+const RecipeTextDiv = styled.div`
+width: 50%;
+margin-left:2%;
+`
 const FormGroup = styled.div`
   color: black;
   font-family: sans-serif;
@@ -85,6 +119,9 @@ const StyledTextArea = styled.textarea`
   border: none;
   padding: 0;
 `;
+const TextSpan = styled.span`
+margin-left: 1rem;
+`
 
 const StyledInput2 = styled.input`
   margin: 0.5rem 1.5rem;
@@ -206,5 +243,9 @@ export {
   StyledDd,
   LandingStyle,
   LoginBtn,
-  LoginFormDiv
+  LoginFormDiv,
+  TextSpan,
+  RecipeCard,
+  RecipeImage,
+  RecipeTextDiv
 };

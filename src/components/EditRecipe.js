@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import schema from '../validation/Add-Schema';
 import { connect } from 'react-redux';
-import { editRecipe, getRecipeId } from '../actions/recipeActions'
-import { useHistory, useParams } from 'react-router'
+import { editRecipe, getRecipeId } from '../actions/recipeActions';
+import { useHistory, useParams } from 'react-router';
 import {
   PageStyle,
   FormGroup,
@@ -45,25 +45,23 @@ const initialFormErrors = {
   category: '',
 };
 
-const initialDisabled = true;
+// const initialDisabled = true;
 
 const EditRecipe = (props) => {
   const [recipe, setRecipe] = useState(recipeObj);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [formValues, setFormValues] = useState(initialFormValues);
-  const [disabled, setDisabled] = useState(initialDisabled);
+  // const [disabled, setDisabled] = useState(initialDisabled);
   const { singleRecipes } = props;
   const { push } = useHistory();
   const { recipeID } = useParams();
-  
+  const { getRecipeId } = props;
+
   useEffect(() => {
-    props.getRecipeId(recipeID)
-  }, [])
-  
+    getRecipeId(recipeID);
+  }, [getRecipeId, recipeID]);
 
-  console.log(singleRecipes)
-
-  
+  console.log(singleRecipes);
 
   const onSubmit = (evt) => {
     evt.preventDefault();
@@ -75,11 +73,9 @@ const EditRecipe = (props) => {
       instructions: formValues.instructions.trim(),
       category: formValues.category,
     };
-    // setFormValues({ ...recipe, newRecipe });
     props.editRecipe(recipeID, newRecipe);
-    push(`/recipes`)
-    console.log('test')
-    
+    push(`/recipes`);
+    console.log('test');
   };
 
   const changeSubmitColor = (valid) => {
@@ -91,7 +87,7 @@ const EditRecipe = (props) => {
 
   useEffect(() => {
     schema.isValid(formValues).then((valid) => {
-      setDisabled(!valid);
+      // setDisabled(!valid);
       changeSubmitColor(!valid);
     });
   }, [formValues]);
@@ -141,11 +137,11 @@ const EditRecipe = (props) => {
           <label>
             Recipe Image :&nbsp;
             <StyledInput
-                    value={formValues.recipe_img}
-                    onChange={onChange}
-                    name="recipe_img"
-                    type="text"
-                />
+              value={formValues.recipe_img}
+              onChange={onChange}
+              name="recipe_img"
+              type="file"
+            />
           </label>
 
           <label>
@@ -211,13 +207,13 @@ const EditRecipe = (props) => {
       </FormGroup>
     </PageStyle>
   );
-}
+};
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     singleRecipes: state.recipeReducer.singleRecipes,
-    allRecipes: state.recipeReducer.allRecipes
-  }
-}
+    allRecipes: state.recipeReducer.allRecipes,
+  };
+};
 
-export default connect(mapStateToProps, {editRecipe, getRecipeId})(EditRecipe);
+export default connect(mapStateToProps, { editRecipe, getRecipeId })(EditRecipe);

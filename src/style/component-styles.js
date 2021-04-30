@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-    // within the tick marks in a style definition, responsive changes would go here:
-    // @media (max-width: 800px) {
-    //   flex-direction: column;
-    // }
-
-
 const LoginStyle = styled.div`
   box-sizing: border-box;
   background-color: #fefae0;
@@ -35,13 +29,12 @@ const LoginBtn = styled.button`
   font-size: 1rem;
   margin: 0.5rem;
   padding: 2px;
-  border-radius:20px;
+  border-radius: 20px;
 `;
 
 const PageStyle = styled.div`
   box-sizing: border-box;
-  //background-color: #fefae0;
-  background-color:#1d2441;
+  background-color: #1d2441;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -51,44 +44,40 @@ const PageStyle = styled.div`
 const RecipeImage = styled.img`
   min-width: 45%;
   max-width: 45%;
-  // height: 10vh;
-`
+`;
 const RecipeCard = styled.div`
   display: flex;
   flex-direction: row;
   align-items: space-between;
   justify-content: center;
-  // box-sizing: border-box;
   background-color: white;
-  // background-color: #fefae0;
   padding: 3%;
   width: 80%;
   border: solid black 1px;
   margin-left: auto;
   margin-right: auto;
-  margin-botton: 50rem;
   font-family: sans-serif;
 `;
 
 const RecipeTextDiv = styled.div`
-width: 50%;
-margin-left:2%;
-`
+  width: 50%;
+  margin-left: 2%;
+`;
 
 const RecipeH2 = styled.h2`
   margin-bottom: 0;
   margin-top: 5px;
-`
+`;
 
 const RecipeH3 = styled.h3`
   margin-bottom: 0;
   margin-top: 5px;
-`
+`;
 
 const RecipeH4 = styled.h4`
   margin-bottom: 0;
-  margin-top: 5px
-`
+  margin-top: 5px;
+`;
 const FormGroup = styled.div`
   color: black;
   font-family: sans-serif;
@@ -107,12 +96,12 @@ const LoginH1 = styled.h1`
   height: 2vh;
   display: flex;
   justify-content: center;
-  color:#71090d;
+  color: #71090d;
   font-family: sans-serif;
   font-size: 4rem;
   font-weight: bold;
-  padding:2rem;
-  margin-top:0;
+  padding: 2rem;
+  margin-top: 0;
 `;
 
 const StyledH1 = styled.h1`
@@ -123,60 +112,57 @@ const StyledH1 = styled.h1`
   font-family: sans-serif;
   font-size: 4rem;
   font-weight: bold;
-  padding:2rem;
-  margin-top:0;
+  padding: 2rem;
+  margin-top: 0;
 `;
 
 const StyledH2 = styled.h2`
   height: 2vh;
   display: flex;
   justify-content: center;
-  //color: #3d405b;
-  color:#fde151;
+
+  color: #fde151;
   font-family: sans-serif;
   font-size: 2rem;
   font-weight: bold;
-  font-style:Italic;
+  font-style: Italic;
 `;
 const StyledH3 = styled.h3`
   height: 1vh;
   display: flex;
   justify-content: left;
-  color:#fde151;
+  color: #fde151;
   font-family: sans-serif;
   font-size: 2rem;
   font-weight: bold;
-  font-style:Italic;
+  font-style: Italic;
 `;
 
 const StyledH4 = styled.h4`
   height: 1vh;
   display: flex;
   justify-content: center;
-  color:  #e07a5f;
+  color: #e07a5f;
   font-family: sans-serif;
-  font-style:Italic;
+  font-style: Italic;
   font-size: 2rem;
   font-weight: bold;
 `;
 
 const StyledInput = styled.input`
-  display:flex;
-  align-content:center;
+  display: flex;
+  align-content: center;
   width: 15rem;
   height: 2vh;
   margin: 0.5rem;
-  padding:2px;
-  border-radius:20px;
-  text-align:center;
+  padding: 2px;
+  border-radius: 20px;
+  text-align: center;
 `;
 const TextSpan = styled.div`
   margin-left: 1rem;
   margin-top: 2px;
   margin-bottom: 5px;
-
-margin
-
 `
 
 const StyledInput2 = styled.input`
@@ -197,7 +183,7 @@ const ButtonDiv = styled.div`
 `;
 
 const StyledDiv2 = styled.div`
-margin:0;
+  margin: 0;
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -214,7 +200,7 @@ const Btn = styled.button`
   align-items: center;
   font-size: 1rem;
   text-align-last: center;
-  border-radius:20px;
+  border-radius: 20px;
 `;
 
 const StyledBtn = styled.button`
@@ -223,7 +209,6 @@ const StyledBtn = styled.button`
   margin: 0.5rem;
   width: 15rem;
   height: 2.5vh;
-
 `;
 
 const StyledBtn2 = styled.button`
@@ -232,32 +217,31 @@ const StyledBtn2 = styled.button`
   margin: 0.5rem;
   width: 10rem;
   height: 2.5vh;
-  background-color: #81B29A;
+  background-color: #81b29a;
   text-align-last: center;
-  border-radius:20px;
-  justify-content:right;
-  margin-top:1.5rem;
-  margin-left:2rem;
+  border-radius: 20px;
+  justify-content: right;
+  margin-top: 1.5rem;
+  margin-left: 2rem;
 `;
 
 const StyledLabel = styled.label`
   margin-right: 12rem;
 `;
 
-//dropdown
 const StyledDd = styled.select`
-   margin: .5rem 3rem;
+  margin: 0.5rem 3rem;
   width: 16rem;
   height: 2.5vh;
   padding: 2px;
   text-align-last: center;
-  border-radius:20px;
-  border:1.5px solid;
+  border-radius: 20px;
+  border: 1.5px solid;
 `;
 
 const StyledDd2 = styled.select`
   text-align-last: center;
-  border-radius:20px;
+  border-radius: 20px;
   margin: 0.5rem 3rem;
   width: 15.5rem;
   height: 2.5vh;
@@ -276,31 +260,30 @@ const StyledTextArea = styled.textarea`
   width: 65%;
   resize: none;
   border: none;
-  border-radius:80px;
-  padding:2rem;
-  background-color:#fcfdf5;
-  
+  border-radius: 80px;
+  padding: 2rem;
+  background-color: #fcfdf5;
 `;
 
 const StyledFirstDiv = styled.div`
-  border-radius:90px;
+  border-radius: 90px;
   display: flex;
-  justify-content:center;
+  justify-content: center;
   flex-direction: column;
   padding: 1rem;
   align-items: center;
   width: 65%;
-  background-color:#fcfdf5;
-  height:30vh;
+  background-color: #fcfdf5;
+  height: 30vh;
 `;
 const StyledSecondDiv = styled.div`
   border-radius: 140px;
   display: flex;
-  justify-content:center;
+  justify-content: center;
   flex-direction: column;
   align-items: left;
   width: 65%;
-  background-color:#fcfdf5;
+  background-color: #fcfdf5;
 `;
 const StyledThirdDiv = styled.div`
   border-radius: 80px;
@@ -308,7 +291,7 @@ const StyledThirdDiv = styled.div`
   flex-direction: column;
   align-items: left;
   width: 65%;
-  background-color:#fcfdf5;
+  background-color: #fcfdf5;
 `;
 const ValidationErrs = styled.div`
   color: red;
@@ -326,26 +309,21 @@ const LoginFormDiv = styled.div`
   padding: 15px;
   align-items: center;
   align-content: center;
-  border: 3px inset #81B29A;
-  border-radius:10px;
+  border: 3px inset #81b29a;
+  border-radius: 10px;
   box-sizing: border-box;
   background-color: #fefae0;
   width: 20rem;
 `;
 const BgImgStyle = styled.image`
-// box-sizing: border-box;
-//background-image: url(' https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fGZvb2R8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
-//background-image: url('https://images.unsplash.com/photo-1548943487-a2e4e43b4853?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-//background-image: url('https://images.unsplash.com/photo-1612179343574-31b219a3915c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=999&q=80');
-background-image: url('https://images.unsplash.com/photo-1541832676-9b763b0239ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1521&q=80');
-background-size:cover;
-display: flex;
-justify-content:center;
- marign:0;
- padding:0;
-width:100%;
-height:90vh;
-background-repeat:no-repeat;
+  background-image: url('https://images.unsplash.com/photo-1541832676-9b763b0239ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1521&q=80');
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  width: 100%;
+  height: 90vh;
+  background-repeat: no-repeat;
 `;
 
 export {
@@ -370,7 +348,7 @@ export {
   StyledThirdDiv,
   ValidationErrs,
   ButtonDiv,
- StyledDiv2,
+  StyledDiv2,
   StyledDd,
   StyledDd2,
   LandingStyle,
@@ -383,5 +361,5 @@ export {
   BgImgStyle,
   RecipeH2,
   RecipeH3,
-  RecipeH4
+  RecipeH4,
 };

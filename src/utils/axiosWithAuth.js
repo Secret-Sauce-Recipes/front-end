@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
 const axiosWithAuth = () => {
-  const token = window.localStorage.getItem("token");
+  const token = window.localStorage.getItem('token');
 
   return axios.create({
-    baseURL: "https://secret-sauce-recipe.herokuapp.com/",
+    baseURL: 'https://secret-sauce-recipe.herokuapp.com/',
     headers: {
       authorization: token,
     },

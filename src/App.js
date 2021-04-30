@@ -1,12 +1,12 @@
-import React from "react";
-import { Route } from "react-router-dom";
-import RegisterForm from "./components/RegisterForm";
-import { PrivateRoute } from "./utils/PrivateRoute";
-import LoginForm from "./components/LoginForm";
-import Landing from "./components/Landing";
-import EditRecipe from "./components/EditRecipe";
-import LoggedInLanding from "./components/LoggedInLanding";
-import AddRecipe from "./components/AddRecipe";
+import React from 'react';
+import { Route } from 'react-router-dom';
+import RegisterForm from './components/RegisterForm';
+import { PrivateRoute } from './utils/PrivateRoute';
+import LoginForm from './components/LoginForm';
+import Landing from './components/Landing';
+import EditRecipe from './components/EditRecipe';
+import LoggedInLanding from './components/LoggedInLanding';
+import AddRecipe from './components/AddRecipe';
 
 function App() {
   return (

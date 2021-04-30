@@ -14,33 +14,31 @@ import {
   GET_RECIPE_BY_ID_LOADING,
   GET_RECIPE_BY_ID_SUCCESS,
   GET_RECIPE_BY_ID_FAILURE,
-} from "../actions/recipeActions";
+} from '../actions/recipeActions';
 
 const initialState = {
-  error: "",
+  error: '',
   isLoading: false,
-  allRecipes: [{
-   
-    recipe_id: "",
-    recipe_img: "",
-    source: "",
-    category: "",
-    ingredients: "",
-    instructions: "",
-    recipe_name: ""
-
-  }],
+  allRecipes: [
+    {
+      recipe_id: '',
+      recipe_img: '',
+      source: '',
+      category: '',
+      ingredients: '',
+      instructions: '',
+      recipe_name: '',
+    },
+  ],
   singleRecipe: {
-    
-    recipe_id: "",
-    recipe_img: "",
-    source: "",
-    category: "",
-    ingredients: "",
-    instructions: "",
-    recipe_name: ""
-
-  }
+    recipe_id: '',
+    recipe_img: '',
+    source: '',
+    category: '',
+    ingredients: '',
+    instructions: '',
+    recipe_name: '',
+  },
 };
 
 export const recipeReducer = (state = initialState, action) => {
@@ -49,14 +47,14 @@ export const recipeReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        error: "",
+        error: '',
       };
     case GET_RECIPES_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        error: "",
-        allRecipes: action.payload
+        error: '',
+        allRecipes: action.payload,
       };
     case GET_RECIPES_FAILURE:
       return {
@@ -68,14 +66,14 @@ export const recipeReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        error: "",
+        error: '',
       };
     case ADD_RECIPE_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        error: "",
-        allRecipes: [...state.allRecipes, action.payload]
+        error: '',
+        allRecipes: [...state.allRecipes, action.payload],
       };
     case ADD_RECIPE_FAILURE:
       return {
@@ -92,8 +90,8 @@ export const recipeReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        allRecipes: state.allRecipes.filter(recipe => {
-          return recipe.recipe_id !== action.payload.recipe_id
+        allRecipes: state.allRecipes.filter((recipe) => {
+          return recipe.recipe_id !== action.payload.recipe_id;
         }),
       };
     case DELETE_RECIPE_FAILURE:
@@ -106,13 +104,13 @@ export const recipeReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        error: "",
+        error: '',
       };
     case EDIT_RECIPE_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        error: "",
+        error: '',
       };
     case EDIT_RECIPE_FAILURE:
       return {
@@ -129,14 +127,14 @@ export const recipeReducer = (state = initialState, action) => {
       return {
         ...state,
         singleRecipes: action.payload,
-        isLoading: false
-      }
+        isLoading: false,
+      };
     case GET_RECIPE_BY_ID_FAILURE:
       return {
         ...state,
         error: action.payload,
-        isLoading: false
-      }
+        isLoading: false,
+      };
     default:
       return state;
   }

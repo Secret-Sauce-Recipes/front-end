@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import schema from '../validation/Add-Schema';
 import { connect } from 'react-redux';
-import { addRecipe} from '../actions/recipeActions'
-import { useHistory } from 'react-router'
+import { addRecipe } from '../actions/recipeActions';
+import { useHistory } from 'react-router';
 import {
   PageStyle,
   FormGroup,
@@ -14,8 +14,6 @@ import {
   StyledInput,
   Btn,
   StyledFirstDiv,
-  StyledSecondDiv,
-  StyledThirdDiv,
   ValidationErrs,
   ButtonDiv,
   StyledDd,
@@ -65,12 +63,9 @@ const AddRecipe = (props) => {
       instructions: formValues.instructions.trim(),
       category: formValues.category,
     };
-    // setFormValues({ ...recipe, newRecipe });
     props.addRecipe(newRecipe);
     setFormValues(initialFormValues);
-    push(`/recipes`)
-    console.log('test')
-    
+    push(`/recipes`);
   };
   const changeSubmitColor = (valid) => {
     if (!valid) {
@@ -88,6 +83,7 @@ const AddRecipe = (props) => {
 
   const onChange = (evt) => {
     const { name, value } = evt.target;
+    console.log(evt.target)
     setRecipe({ ...recipe, [name]: value });
     yup
       .reach(schema, name)
@@ -131,11 +127,11 @@ const AddRecipe = (props) => {
           <label>
             Recipe Image :&nbsp;
             <StyledInput
-                    value={recipe.recipe_img}
-                    onChange={onChange}
-                    name="recipe_img"
-                    type="text"
-                />
+              value={recipe.recipe_img}
+              onChange={onChange}
+              name="recipe_img"
+              type="file"
+            />
           </label>
 
           <label>
@@ -148,66 +144,55 @@ const AddRecipe = (props) => {
             />
           </label>
 
-          <StyledLabel  htmlFor="Category">
-            Category :
-            </StyledLabel>
-            <StyledDd
-              name="category"
-              id="categories"
-              onChange={onChange}
-              value={recipe.category}>
-              <option value="choice">Choose a Category</option>
-              <option value="breakfast">Breakfast</option>
-              <option value="brunch">Brunch</option>
-              <option value="lunch">Lunch</option>
-              <option value="snack">Snack</option>
-              <option value="dinner">Dinner</option>
-            </StyledDd>
-            <ValidationErrs>{formErrors.categories}</ValidationErrs>
-          
+          <StyledLabel htmlFor="Category">Category :</StyledLabel>
+          <StyledDd
+            name="category"
+            id="categories"
+            onChange={onChange}
+            value={recipe.category}>
+            <option value="choice">Choose a Category</option>
+            <option value="breakfast">Breakfast</option>
+            <option value="brunch">Brunch</option>
+            <option value="lunch">Lunch</option>
+            <option value="snack">Snack</option>
+            <option value="dinner">Dinner</option>
+          </StyledDd>
+          <ValidationErrs>{formErrors.categories}</ValidationErrs>
         </StyledFirstDiv>
         <div>
           <StyledH3>Ingredients</StyledH3>
         </div>
-        {/* <StyledSecondDiv> */}
-          {/* <label> */}
-            <StyledTextArea
-              value={recipe.ingredients}
-              onChange={onChange}
-              name="ingredients"
-              type="text"
-            />
-            <ValidationErrs> {formErrors.ingredients}</ValidationErrs>
-          {/* </label> */}
-        {/* </StyledSecondDiv> */}
+        <StyledTextArea
+          value={recipe.ingredients}
+          onChange={onChange}
+          name="ingredients"
+          type="text"
+        />
+        <ValidationErrs> {formErrors.ingredients}</ValidationErrs>
         <div>
           <StyledH3>Instructions</StyledH3>
         </div>
-        {/* <StyledThirdDiv> */}
-          {/* <label> */}
-            <StyledTextArea
-              value={recipe.instructions}
-              onChange={onChange}
-              name="instructions"
-              type="text"
-            />
-            <ValidationErrs>{formErrors.instructions}</ValidationErrs>
-          {/* </label> */}
-        {/* </StyledThirdDiv> */}
+        <StyledTextArea
+          value={recipe.instructions}
+          onChange={onChange}
+          name="instructions"
+          type="text"
+        />
+        <ValidationErrs>{formErrors.instructions}</ValidationErrs>
         <ButtonDiv>
-          <Btn disabled={disabled} onClick={onSubmit}id="addBtn">
+          <Btn disabled={disabled} onClick={onSubmit} id="addBtn">
             Add Recipe
           </Btn>
         </ButtonDiv>
       </FormGroup>
     </PageStyle>
   );
-}
+};
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    allRecipes: state.recipeReducer.allRecipes
-  }
-}
+    allRecipes: state.recipeReducer.allRecipes,
+  };
+};
 
-export default connect(mapStateToProps, {addRecipe})(AddRecipe);
+export default connect(mapStateToProps, { addRecipe })(AddRecipe);

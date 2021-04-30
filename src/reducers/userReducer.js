@@ -16,7 +16,7 @@ const initialState = {
   user_id: '',
   token: window.localStorage.getItem('token') || '',
   message: '',
-  isLoggedIn: false
+  isLoggedIn: false,
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -54,7 +54,7 @@ export const userReducer = (state = initialState, action) => {
         user_id: action.payload.user_id,
         token: action.payload.token,
         message: action.payload.message,
-        isLoggedIn: true
+        isLoggedIn: true,
       };
     case LOGIN_FAILURE:
       return {

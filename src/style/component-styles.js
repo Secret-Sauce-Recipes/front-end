@@ -49,22 +49,22 @@ const PageStyle = styled.div`
 const RecipeImage = styled.img`
   min-width: 45%;
   max-width: 45%;
-  height: auto;
+  // height: 10vh;
 `
 const RecipeCard = styled.div`
   display: flex;
   flex-direction: row;
   align-items: space-between;
   justify-content: center;
-  box-sizing: border-box;
+  // box-sizing: border-box;
   background-color: white;
   // background-color: #fefae0;
-  margin-left: auto;
-  margin-right: auto;
-  margin-botton: 10rem;
   padding: 3%;
   width: 80%;
   border: solid black 1px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-botton: 50rem;
   font-family: sans-serif;
 `;
 

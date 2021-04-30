@@ -29,17 +29,21 @@ const SingleRecipes = (props) => {
   return ( 
   
  <PageStyle>
+    <p></p>
   <RecipeCard>
     <RecipeImage src={recipe.recipe_img} alt={recipe.recipe_name} />
     <RecipeTextDiv>
       <RecipeH2>{recipe.recipe_name}</RecipeH2> <button>Edit</button>
-      <RecipeH3>{recipe.category}</RecipeH3>
+      <RecipeH3>Category: {recipe.category}</RecipeH3>
       <RecipeH4>Ingredients:</RecipeH4><TextSpan>{recipe.ingredients}</TextSpan>
       <RecipeH4>Instructions:</RecipeH4><TextSpan>{recipe.instructions}</TextSpan>
       <RecipeH4>Source:</RecipeH4><TextSpan>{recipe.source}</TextSpan>
     </RecipeTextDiv>
   </RecipeCard>
-</PageStyle>
+  {/* <div margin = "2rem">
+  </div> */}
+
+ </PageStyle>
 
    )
 };

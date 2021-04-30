@@ -45,10 +45,10 @@ const LoggedInLanding = (props) => {
   // push(`/recipes`)
   // console.log('test')
 
-  const onChange = (evt) => {
-    const { name, value } = evt.target;
-    setSearch( { ...initialFormValues, [name]: value });
-  }
+  // const onChange = (evt) => {
+  //   const { name, value } = evt.target;
+  //   setSearch( { ...initialFormValues, [name]: value });
+  // }
 
   return (
     <div>
@@ -57,10 +57,9 @@ const LoggedInLanding = (props) => {
           <StyledH1>Secret Sauce Recipes</StyledH1>
           </div>
         <BgImgStyle>
-  
             <div>
              {/* style={{ backgroundImage: `url("https://images.megapixl.com/6683/66838674.jpg")` , backgroundSize:"cover"}}> */}
-             
+{/*              
             <select
               name="categories"
               id="categories">
@@ -70,23 +69,21 @@ const LoggedInLanding = (props) => {
               <option value="lunch">Lunch</option>
               <option value="snack">Snack</option>
               <option value="dinner">Dinner</option>
-            </select>
-        
-        <input
+            </select> */}
+        {/* <input
               // value={recipe.recipe_name}
               // onChange={onChange}
               placeholder="Search by source name"
               name="source"
               type="text"
-            />
-       <input
+            /> */}
+            <input
              // value={recipe.recipe_name}
              // onChange={onChange}
              placeholder="Search by recipe name"
              name="recipe_name"
              type="text"
             />
-
             <button id="searchBtn" submit={onSubmit}> Search </button>
            </div>
     </BgImgStyle>

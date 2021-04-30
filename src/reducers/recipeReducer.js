@@ -11,6 +11,9 @@ import {
   EDIT_RECIPE_LOADING,
   EDIT_RECIPE_SUCCESS,
   EDIT_RECIPE_FAILURE,
+  GET_RECIPE_BY_ID_LOADING,
+  GET_RECIPE_BY_ID_SUCCESS,
+  GET_RECIPE_BY_ID_FAILURE,
 } from "../actions/recipeActions";
 
 const initialState = {
@@ -110,7 +113,6 @@ export const recipeReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: "",
-        allRecipes: [...state.allRecipes, action.payload],
       };
     case EDIT_RECIPE_FAILURE:
       return {
@@ -118,6 +120,23 @@ export const recipeReducer = (state = initialState, action) => {
         isLoading: false,
         error: action.payload,
       };
+    case GET_RECIPE_BY_ID_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case GET_RECIPE_BY_ID_SUCCESS:
+      return {
+        ...state,
+        singleRecipes: action.payload,
+        isLoading: false
+      }
+    case GET_RECIPE_BY_ID_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false
+      }
     default:
       return state;
   }

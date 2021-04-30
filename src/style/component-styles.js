@@ -59,7 +59,7 @@ const RecipeCard = styled.div`
   background-color: #fefae0;
   margin-left: auto;
   margin-right: auto;
-  margin-botton:3%
+  margin-botton:10%
   padding: 3%;
   width: 70%;
   border: solid black 1px;

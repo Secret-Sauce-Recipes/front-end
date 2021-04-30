@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { StyledH1, StyledH3,LoginH1, LandingStyle} from '../style/component-styles';
-
 import LoginForm from './LoginForm';
 
 const Landing = () => {

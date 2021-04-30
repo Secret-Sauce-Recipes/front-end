@@ -45,10 +45,10 @@ const LoggedInLanding = (props) => {
   // push(`/recipes`)
   // console.log('test')
 
-  const onChange = (evt) => {
-    const { name, value } = evt.target;
-    setSearch( { ...initialFormValues, [name]: value });
-  }
+  // const onChange = (evt) => {
+  //   const { name, value } = evt.target;
+  //   setSearch( { ...initialFormValues, [name]: value });
+  // }
 
   return (
     <div>
@@ -59,8 +59,6 @@ const LoggedInLanding = (props) => {
           </StyledDiv2>
         <BgImgStyle>
             <StyledDiv>
-            
-        
         <StyledInput
               // value={recipe.recipe_name}
               // onChange={onChange}
@@ -91,6 +89,7 @@ const LoggedInLanding = (props) => {
            </StyledDiv>
            {/* <StyledBtn2 onClick={addHandler}>Add New Recipe ?</StyledBtn2> */}
       </BgImgStyle>
+
     </form>
   <div>
     {/* <Btn onClick={addHandler}>Add Recipe</Btn> */}

@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+    // within the tick marks in a style definition, responsive changes would go here:
+    // @media (max-width: 800px) {
+    //   flex-direction: column;
+    // }
+
+
 const LoginStyle = styled.div`
   box-sizing: border-box;
   background-color: #fefae0;
@@ -39,8 +45,50 @@ const PageStyle = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  font-family: sans-serif;
 `;
+const RecipeImage = styled.img`
+  min-width: 45%;
+  max-width: 45%;
+  // height: 10vh;
+`
+const RecipeCard = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+  justify-content: center;
+  // box-sizing: border-box;
+  background-color: white;
+  // background-color: #fefae0;
+  padding: 3%;
+  width: 80%;
+  border: solid black 1px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-botton: 50rem;
+  font-family: sans-serif;
+`;
+
+const RecipeTextDiv = styled.div`
+width: 50%;
+margin-left:2%;
+`
+
+const RecipeH2 = styled.h2`
+  margin-bottom: 0;
+  margin-top: 5px;
+`
+
+const RecipeH3 = styled.h3`
+  margin-bottom: 0;
+  margin-top: 5px;
+`
+
+const RecipeH4 = styled.h4`
+  margin-bottom: 0;
+  margin-top: 5px
+`
 const FormGroup = styled.div`
   color: black;
   font-family: sans-serif;
@@ -122,6 +170,14 @@ const StyledInput = styled.input`
   border-radius:20px;
   text-align:center;
 `;
+const TextSpan = styled.div`
+  margin-left: 1rem;
+  margin-top: 2px;
+  margin-bottom: 5px;
+
+margin
+
+`
 
 const StyledInput2 = styled.input`
   margin: 0.5rem 1.5rem;
@@ -320,5 +376,12 @@ export {
   LandingStyle,
   LoginBtn,
   LoginFormDiv,
-  BgImgStyle
+  TextSpan,
+  RecipeCard,
+  RecipeImage,
+  RecipeTextDiv,
+  BgImgStyle,
+  RecipeH2,
+  RecipeH3,
+  RecipeH4
 };

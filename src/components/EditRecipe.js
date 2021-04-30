@@ -1,156 +1,223 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import * as yup from 'yup';
+import schema from '../validation/Add-Schema';
+import { connect } from 'react-redux';
+import { editRecipe, getRecipeId } from '../actions/recipeActions'
+import { useHistory, useParams } from 'react-router'
+import {
+  PageStyle,
+  FormGroup,
+  StyledH2,
+  StyledH3,
+  StyledLabel,
+  StyledTextArea,
+  StyledInput,
+  Btn,
+  StyledFirstDiv,
+  StyledSecondDiv,
+  StyledThirdDiv,
+  ValidationErrs,
+  ButtonDiv,
+  StyledDd,
+} from '../style/component-styles';
 
-const PageStyle = styled.div`
-  box-sizing: border-box;
-  background-color: #fefae0;
-  width: 100%;
-  border: 1px solid blue;
-  display: flex;
-  justify-content: center;
-`;
-const FormGroup = styled.div`
-  color: black;
-  font-family: sans-serif;
-  font-size: 1.5rem;
-  font-weight: bold;
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  margin: 0 auto;
-  justify-content: center;
-`;
-const StyledInput = styled.input`
-  width: 20rem;
-  height: 3.5vh;
-`;
-const StyledTextArea = styled.textarea`
-  width: 20rem;
-  height: 25vh;
-`;
-const StyledFirstDiv = styled.div`
-  border: 1.5px solid black;
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
-  align-items: center;
-  margin: 1.5rem;
-`;
-const StyledSecondDiv = styled.div`
-  border: 1.5px solid black;
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
-  align-items: center;
-  margin: 1.5rem;
-`;
-const StyledThirdDiv = styled.div`
-  border: 1.5px solid black;
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
-  align-items: center;
-  margin: 1.5rem;
-`;
-const ButtonDiv = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-const Btn = styled.button`
-  background-color: red;
-  width: 10%;
-  height: 5vh;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  font-size: 1rem;
-`;
-const EditRecipe = () => {
-  const recipeObj = {
-    recipe_name: '',
-    ingredients: [
-      {
-        ingredient_name: '',
-        ingredient_quantity: 0,
-        ingredient_unit: '',
-      },
-    ],
-    source: '',
-    instructions: [
-      {
-        instruction_id: '',
-        instruction_text: '',
-      },
-    ],
-    categories: [],
-  };
+const recipeObj = {
+  recipe_id: '',
+  recipe_name: '',
+  recipe_img: '',
+  ingredients: '',
+  source: '',
+  instructions: '',
+  category: '',
+};
+const initialFormValues = {
+  recipe_name: '',
+  recipe_img: '',
+  ingredients: '',
+  source: '',
+  instructions: '',
+  category: '',
+};
+const initialFormErrors = {
+  recipe_name: '',
+  ingredients: '',
+  instructions: '',
+  category: '',
+};
+
+const initialDisabled = true;
+
+const EditRecipe = (props) => {
   const [recipe, setRecipe] = useState(recipeObj);
-  const onChange = (evt) => {
-    setRecipe({ ...recipe, [evt.target.name]: evt.target.value });
-  };
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [formValues, setFormValues] = useState(initialFormValues);
+  const [disabled, setDisabled] = useState(initialDisabled);
+  const { singleRecipes } = props;
+  const { push } = useHistory();
+  const { recipeID } = useParams();
+  
+  useEffect(() => {
+    props.getRecipeId(recipeID)
+  }, [])
+  
+
+  console.log(singleRecipes)
+
+  
+
   const onSubmit = (evt) => {
     evt.preventDefault();
+    const newRecipe = {
+      recipe_name: formValues.recipe_name.trim(),
+      recipe_img: formValues.recipe_img.trim(),
+      ingredients: formValues.ingredients.trim(),
+      source: formValues.source.trim(),
+      instructions: formValues.instructions.trim(),
+      category: formValues.category,
+    };
+    // setFormValues({ ...recipe, newRecipe });
+    props.editRecipe(recipeID, newRecipe);
+    push(`/recipes`)
+    console.log('test')
+    
   };
+
+  const changeSubmitColor = (valid) => {
+    if (!valid) {
+      var button = document.getElementById('addBtn');
+      button.style.backgroundColor = '#81B29A';
+    }
+  };
+
+  useEffect(() => {
+    schema.isValid(formValues).then((valid) => {
+      setDisabled(!valid);
+      changeSubmitColor(!valid);
+    });
+  }, [formValues]);
+
+  const onChange = (evt) => {
+    const { name, value } = evt.target;
+    setRecipe({ ...recipe, [name]: value });
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(() => {
+        setFormErrors({
+          ...formErrors,
+          [name]: '',
+        });
+      })
+      .catch((err) => {
+        setFormErrors({
+          ...formErrors,
+          [name]: err.errors[0],
+        });
+      });
+
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
+
   return (
     <PageStyle>
-      <FormGroup onSubmit={onSubmit}>
+      <FormGroup>
+        <div className="form-input">
+          <StyledH2>Edit Recipe</StyledH2>
+        </div>
         <StyledFirstDiv>
           <label>
-            Recipe Name
+            Recipe Name :&nbsp;
             <StyledInput
-              value={recipe.recipe_name}
+              value={formValues.recipe_name}
               onChange={onChange}
               name="recipe_name"
               type="text"
             />
+            <ValidationErrs>{formErrors.recipe_name}</ValidationErrs>
           </label>
           <label>
-            Source
+            Recipe Image :&nbsp;
             <StyledInput
-              value={recipe.source}
+                    value={formValues.recipe_img}
+                    onChange={onChange}
+                    name="recipe_img"
+                    type="text"
+                />
+          </label>
+
+          <label>
+            Source Name :&nbsp;
+            <StyledInput
+              value={formValues.source}
               onChange={onChange}
               name="source"
               type="text"
             />
           </label>
-          <label>
-            Categories
-            <StyledInput
-              value={recipe.categories}
+
+          <StyledLabel htmlFor="Category">
+            Category:
+            <StyledDd
+              name="category"
+              id="categories"
               onChange={onChange}
-              name="categories"
-              type="text"
-            />
-          </label>
+              value={formValues.category}>
+              <option value="choice">Choose a Category</option>
+              <option value="breakfast">Breakfast</option>
+              <option value="brunch">Brunch</option>
+              <option value="lunch">Lunch</option>
+              <option value="snack">Snack</option>
+              <option value="dinner">Dinner</option>
+            </StyledDd>
+            <ValidationErrs>{formErrors.categories}</ValidationErrs>
+          </StyledLabel>
         </StyledFirstDiv>
+        <div>
+          <StyledH3>Ingredients</StyledH3>
+        </div>
         <StyledSecondDiv>
           <label>
-            Ingredients
             <StyledTextArea
-              value={recipe.ingredients.ingredient_name}
+              value={formValues.ingredients}
               onChange={onChange}
-              name="ingredient_name"
+              name="ingredients"
               type="text"
             />
+            <ValidationErrs> {formErrors.ingredients}</ValidationErrs>
           </label>
         </StyledSecondDiv>
+        <div>
+          <StyledH3>Instructions</StyledH3>
+        </div>
         <StyledThirdDiv>
           <label>
-            Instructions
             <StyledTextArea
-              value={recipe.instructions.instruction_text}
+              value={formValues.instructions}
               onChange={onChange}
-              name="instruction_text"
+              name="instructions"
               type="text"
             />
+            <ValidationErrs>{formErrors.instructions}</ValidationErrs>
           </label>
         </StyledThirdDiv>
         <ButtonDiv>
-          <Btn> Submit Recipe </Btn>
+          <Btn onClick={onSubmit} id="addBtn">
+            Add Recipe
+          </Btn>
         </ButtonDiv>
       </FormGroup>
     </PageStyle>
   );
-};
-export default EditRecipe;
+}
+
+const mapStateToProps = state => {
+  return {
+    singleRecipes: state.recipeReducer.singleRecipes,
+    allRecipes: state.recipeReducer.allRecipes
+  }
+}
+
+export default connect(mapStateToProps, {editRecipe, getRecipeId})(EditRecipe);

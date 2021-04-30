@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { StyledH1, LandingStyle} from '../style/component-styles';
-
+import { StyledH1, StyledH3,LoginH1, LandingStyle} from '../style/component-styles';
 import LoginForm from './LoginForm';
 
 const Landing = () => {
@@ -10,7 +9,7 @@ const Landing = () => {
       <LandingStyle>
         {/* <FormGroup> */}
         {/* <StyledH2>Secret Sauce Recipes</StyledH2> */}
-        <StyledH1>Secret Sauce Recipes</StyledH1>
+        <LoginH1>Secret Sauce Recipes</LoginH1>
         {/* <h2>Secret Sauce Recipes</h2> */}
         <h3>Organize and store recipes, hide them from prying eyes</h3>
         <LoginForm />

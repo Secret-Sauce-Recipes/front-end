@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyledH1, StyledH3, BgImgStyle } from '../style/component-styles';
+import { StyledH1, Btn,StyledDd2,StyledDiv,StyledBtn2,ButtonDiv,StyledDiv2, StyledInput,BgImgStyle } from '../style/component-styles';
 import { useHistory } from 'react-router'
 import SingleRecipe from './SingleRecipe'
 import { connect } from 'react-redux';
@@ -53,44 +53,46 @@ const LoggedInLanding = (props) => {
   return (
     <div>
     <form className="landingForm">
-          <div>
-          <StyledH1>Secret Sauce Recipes</StyledH1>
-          </div>
+          <StyledDiv2>
+            <StyledH1>Secret Sauce Recipes</StyledH1>
+            <StyledBtn2 onClick={addHandler}>Add New Recipe ?</StyledBtn2>
+          </StyledDiv2>
         <BgImgStyle>
-            <div>
-             {/* style={{ backgroundImage: `url("https://images.megapixl.com/6683/66838674.jpg")` , backgroundSize:"cover"}}> */}
-{/*              
-            <select
-              name="categories"
-              id="categories">
-              <option value="choice">serach by a Category</option>
-              <option value="breakfast">Breakfast</option>
-              <option value="brunch">Brunch</option>
-              <option value="lunch">Lunch</option>
-              <option value="snack">Snack</option>
-              <option value="dinner">Dinner</option>
-            </select> */}
-        {/* <input
+            <StyledDiv>
+        <StyledInput
               // value={recipe.recipe_name}
               // onChange={onChange}
               placeholder="Search by source name"
               name="source"
               type="text"
-            /> */}
-            <input
+            />
+       <StyledInput
              // value={recipe.recipe_name}
              // onChange={onChange}
              placeholder="Search by recipe name"
              name="recipe_name"
              type="text"
             />
-            <button id="searchBtn" submit={onSubmit}> Search </button>
-           </div>
-    </BgImgStyle>
+            <StyledDd2
+              name="categories"
+              id="categories">
+              <option value="choice">Search by a Category</option>
+              <option value="breakfast">Breakfast</option>
+              <option value="brunch">Brunch</option>
+              <option value="lunch">Lunch</option>
+              <option value="snack">Snack</option>
+              <option value="dinner">Dinner</option>
+            </StyledDd2>
+            <ButtonDiv>
+            <Btn id="searchBtn" submit={onSubmit}> Search Recipe </Btn>
+            </ButtonDiv>
+           </StyledDiv>
+           {/* <StyledBtn2 onClick={addHandler}>Add New Recipe ?</StyledBtn2> */}
+      </BgImgStyle>
+
     </form>
-  {/* <div>{props.getRecipe}</div> */}
   <div>
-    <button onClick={addHandler}>Add Recipe</button>
+    {/* <Btn onClick={addHandler}>Add Recipe</Btn> */}
     <div>
       {props.allRecipes.map(recipe => {
         return(

@@ -148,8 +148,9 @@ const AddRecipe = (props) => {
             />
           </label>
 
-          <StyledLabel htmlFor="Category">
-            Category:
+          <StyledLabel  htmlFor="Category">
+            Category :
+            </StyledLabel>
             <StyledDd
               name="category"
               id="categories"
@@ -163,13 +164,13 @@ const AddRecipe = (props) => {
               <option value="dinner">Dinner</option>
             </StyledDd>
             <ValidationErrs>{formErrors.categories}</ValidationErrs>
-          </StyledLabel>
+          
         </StyledFirstDiv>
         <div>
           <StyledH3>Ingredients</StyledH3>
         </div>
-        <StyledSecondDiv>
-          <label>
+        {/* <StyledSecondDiv> */}
+          {/* <label> */}
             <StyledTextArea
               value={recipe.ingredients}
               onChange={onChange}
@@ -177,13 +178,13 @@ const AddRecipe = (props) => {
               type="text"
             />
             <ValidationErrs> {formErrors.ingredients}</ValidationErrs>
-          </label>
-        </StyledSecondDiv>
+          {/* </label> */}
+        {/* </StyledSecondDiv> */}
         <div>
           <StyledH3>Instructions</StyledH3>
         </div>
-        <StyledThirdDiv>
-          <label>
+        {/* <StyledThirdDiv> */}
+          {/* <label> */}
             <StyledTextArea
               value={recipe.instructions}
               onChange={onChange}
@@ -191,8 +192,8 @@ const AddRecipe = (props) => {
               type="text"
             />
             <ValidationErrs>{formErrors.instructions}</ValidationErrs>
-          </label>
-        </StyledThirdDiv>
+          {/* </label> */}
+        {/* </StyledThirdDiv> */}
         <ButtonDiv>
           <Btn disabled={disabled} onClick={onSubmit}id="addBtn">
             Add Recipe
